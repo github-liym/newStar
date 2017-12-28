@@ -1,0 +1,74 @@
+{
+  "zh": {
+    "nav": [
+      {
+        "name": "首页",
+        "path": "/"
+      },
+      {
+        "name": "大赛内容",
+        "path": "/content"
+      },
+      {
+        "name": "奖项奖励",
+        "path": "/awards"
+      },
+      {
+        "name": "大赛评委",
+        "path": "/judges"
+      },
+      {
+        "name": "获奖作品",
+        "path": "/works"
+      }
+    ],
+    "sign": {
+      "signIn": {
+        "name": "登录",
+        "path": "/login"
+      }
+    },
+    "footer": {
+      "copyright": "版权所有 91Ant.Copyright © 2013.All rights reserved.",
+      "company": "佛山市蚂蚁雄兵网络科技有限公司",
+      "numberLabel": "备案号",
+      "number": "粤ICP备13078953号-1"
+    }
+  },
+  "en": {
+    "nav": [
+      {
+        "name": "Home",
+        "path": "/"
+      },
+      {
+        "name": "Content",
+        "path": "/content"
+      },
+      {
+        "name": "Awards",
+        "path": "/awards"
+      },
+      {
+        "name": "Judges",
+        "path": "/judges"
+      },
+      {
+        "name": "Works",
+        "path": "/works"
+      }
+    ],
+    "sign": {
+      "signIn": {
+        "name": "sign in",
+        "path": "/login"
+      }
+    },
+    "footer": {
+      "copyright": "版权所有 91Ant.Copyright © 2013.All rights reserved.",
+      "company": "佛山市蚂蚁雄兵网络科技有限公司",
+      "numberLabel": "备案号",
+      "number": "粤ICP备13078953号-1"
+    }
+  }
+}
