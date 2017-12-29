@@ -1,34 +1,12 @@
 <template>
   <div id="index">
-    <el-carousel class="carousel-main" trigger="click" arrow="never">
-      <el-carousel-item v-for="(item,index) in banner" :key="index" :style="{backgroundImage: 'url('+item.url+')'}">
-      </el-carousel-item>
-    </el-carousel>
-    <div class="online-exhibition">
-      <!--<el-carousel class="carousel-commentary" trigger="click" arrow="always" :autoplay="false">
-        <el-carousel-item v-for="(item,index) in onlineExhibition" :key="index" >
-          <div class="cover" :style="{backgroundImage: 'url('+item.url+')'}"></div>
-          <div v-text="item.text"></div>
-        </el-carousel-item>
-      </el-carousel>-->
+    <bannerMain :swiperData = "banner"></bannerMain>
+    <div class="online-exhibition__wrap wrap1200">
+      <h2 class="title-simple">线上展览</h2>
+      <onlineExhibition class="online-exhibition" :swiperData = "onlineExhibition"></onlineExhibition>
     </div>
-    <div class="online-exhibition1">
-      <swiper :options="swiperOption" ref="mySwiper">
-        <!-- slides -->
-        <swiper-slide>I'm Slide 1<br/><br/><br/><br/><br/><br/><br/></swiper-slide>
-        <swiper-slide>I'm Slide 2</swiper-slide>
-        <swiper-slide>I'm Slide 3</swiper-slide>
-        <swiper-slide>I'm Slide 4</swiper-slide>
-        <swiper-slide>I'm Slide 5</swiper-slide>
-        <swiper-slide>I'm Slide 6</swiper-slide>
-        <swiper-slide>I'm Slide 7</swiper-slide>
-        <!-- Optional controls -->
-        <div class="swiper-pagination"  slot="pagination"></div>
-        <div class="swiper-button-prev" slot="button-prev"></div>
-        <div class="swiper-button-next" slot="button-next"></div>
-        <div class="swiper-scrollbar"   slot="scrollbar"></div>
-      </swiper>
-    </div>
+
+
 
 
   </div>
@@ -37,8 +15,8 @@
 </template>
 
 <script>
-  import 'swiper/dist/css/swiper.css'
-  import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import onlineExhibition from '@/components/common/carousel-commentary.vue'
+  import bannerMain from '@/components/common/swiper-main.vue'
 
 	export default {
 		name: 'index',
@@ -75,27 +53,31 @@
         onlineExhibition: [
           {
           	url: '/static/images/index-exhibition.jpg',
-            text: '往届NewStar颁奖典礼'
+            text: '往届NewStar颁奖典礼1'
           },
           {
           	url: '/static/images/index-exhibition.jpg',
-            text: '往届NewStar颁奖典礼'
+            text: '往届NewStar颁奖典礼2'
           },
           {
-          	url: '/static/images/index-exhibition.jpg',
-            text: '往届NewStar颁奖典礼'
+          	url: '/static/images/index_banner.jpg',
+            text: '往届NewStar颁奖典礼3'
           }
         ]
       }
     },
     components: {
-			swiper,
-      swiperSlide
+      onlineExhibition,bannerMain
     }
 	}
 </script>
 
 <style lang="scss">
+  .title-simple {
+    padding: 40px 0 20px;
+    margin: 0 auto;
+    font-size: 18px;
+  }
   .carousel-main {
     .el-carousel__button {
       width: 10px;
@@ -135,7 +117,10 @@
       }
     }
   }
-  .online-exhibition {
+  .online-exhibition__wrap {
+    padding: 0 30px;
+  }
+ /* .online-exhibition {
     background: #fff;
     .carousel-commentary {
       width: 100%;
@@ -143,5 +128,5 @@
       margin: 0 auto;
     }
 
-  }
+  }*/
 </style>

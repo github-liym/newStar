@@ -160,6 +160,7 @@
   }
   i.icon {
     display: block;
+    background-size: 100% 100%;
     &:before {
       content: '';
       display: block;
@@ -170,6 +171,20 @@
     &.i-search {
       width: 10px;
       background-image: url("assets/images/icon/i-search.png");
+    }
+    &.i-prev {
+      width: 50px;
+      background-image: url("assets/images/icon/i-prev.png");
+      &:before {
+        padding-top: (36/50)*100%;
+      }
+    }
+    &.i-next {
+      width: 50px;
+      background-image: url("assets/images/icon/i-next.png");
+      &:before {
+        padding-top: (36/50)*100%;
+      }
     }
   }
 </style>
