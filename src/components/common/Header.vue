@@ -1,11 +1,9 @@
 <template>
-	<header id="header" class="navbar" :class="{'navbar__active': isActive}">
-
-
+  <header id="header" class="navbar" :class="{'navbar__active': isActive}">
     <div class="navbar-top">
       <div class="wrap1200">
         <img class="logo-head" src="../../assets/images/logo-head.png"/>
-        <img class="logo-head__simple" src="../../assets/images/logo.png"/>
+        <router-link :to="{path: '/'}"><img class="logo-head__simple" src="../../assets/images/logo.png"/></router-link>
         <div class="navbar-top__right">
           <ul class="language-trigger">
             <li :class="{active: language=='zh'}">
@@ -35,41 +33,18 @@
         <i class="icon i-search"></i>
       </div>
     </div>
-
- <!-- <div class="navbar-inner">
-     <div class="nav-header">
-       <div class="newstar"></div>
-       <div class="navbar-toggle__trigger" @click="navbarTrigger()"></div>
-     </div>
-     <div class="navbar-main clearfix">
-       <ul class="nav-main">
-       <li v-for="item in nav.item">
-         <router-link :to="{path: item.path}" @click.native="closeNav">{{item.name}}</router-link>
-       </li>
-       </ul>
-       <div class="right-panel">
-         <ul claul "item-sign">
-         <li v-for="item in nav.sign">
-           <router-link :to="{path: item.path}"  @click.native="closeNav">{{item.name}}</router-link>
-         </li>
-         </ul>
-         <div class="item-lang">
-         <a href="javascript:" :class="{active: language=='zh'}" @click="setLanguage('zh')">中文</a>
-         <a href="javascript:" :class="{active: language=='en'}" @click="setLanguage('en')">English</a>
-         </div>
-       </div>
-     </div>
-   </div>-->
   </header>
 </template>
 
 <script>
-	export default {
-		name: 'Header',
+  import store from '@/vuex/store';
+  export default {
+    name: 'Header',
     props: ['nav','language'],
+    store,
     data: function () {
       return {
-      	isActive: false
+        isActive: false
       }
     },
     methods: {
@@ -89,7 +64,7 @@
 <style lang="scss">
   #app {
     @media (max-width: 768px) {
-      padding-top: 59.27px;
+      padding-top: 75px;
     }
   }
   .newstar {
@@ -97,136 +72,136 @@
     width: 137px;
     background: url("../../assets/images/logo.png") no-repeat center;
     background-size: 100% auto;
-  &:before {
-     content: '';
-     display: block;
-     padding-top: (40/137)*100%;
-   }
+    &:before {
+      content: '';
+      display: block;
+      padding-top: (40/137)*100%;
+    }
   }
   .navbar {
     background: #323232;
     color: #fff;
-  .navbar-inner {
-    position: relative;
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
-  @media (max-width: 1200px) {
-    width: 970px;
-  }
-  @media (max-width: 992px) {
-    width: 750px;
-  }
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-  }
-  .nav-header {
-    display: inline-block;
-  }
-  .navbar-main {
-    display: inline-block;
-    margin-left: 50px;
-
-  }
-  .newstar {
-    vertical-align: middle;
-    padding: 14.5px 0;
-  }
-  .right-panel {
-    position: absolute;
-    top: 22px;
-    right: 0;
-  //margin-top: 22px;
-    font-size: 12px;
-  }
-  .item-sign {
-    display: inline-block;
-    margin-right: 20px;
-    li {
+    .navbar-inner {
+      position: relative;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      @media (max-width: 1200px) {
+        width: 970px;
+      }
+      @media (max-width: 992px) {
+        width: 750px;
+      }
+      @media (max-width: 768px) {
+        width: 100%;
+      }
+    }
+    .nav-header {
       display: inline-block;
     }
-  a {
-    line-height: 26px;
-    margin-left: 15px;
-  }
-  }
-  .item-lang {
-    display: inline-block;
-    a {
-      width: 64px;
-      line-height: 26px;
-      border: 1px solid #202020;
-      text-align: center;
-      border-radius: 5px;
-      margin-left: 15px;
-      &:first-child {
-         margin-left: 0;
-       }
-  }
-  .active {
-    background: #202020;
-    display: none;
-  }
-  }
-  @media (max-width: 992px) {
-    .nav-header {
-      display: block;
-      text-align: center;
-    }
     .navbar-main {
-      display: block;
-      margin: 0 auto;
-      text-align: center;
-    }
+      display: inline-block;
+      margin-left: 50px;
 
-  }
-  @media (max-width: 768px) {
+    }
+    .newstar {
+      vertical-align: middle;
+      padding: 14.5px 0;
+    }
+    .right-panel {
+      position: absolute;
+      top: 22px;
+      right: 0;
+      //margin-top: 22px;
+      font-size: 12px;
+    }
+    .item-sign {
+      display: inline-block;
+      margin-right: 20px;
+      li {
+        display: inline-block;
+      }
+      a {
+        line-height: 26px;
+        margin-left: 15px;
+      }
+    }
+    .item-lang {
+      display: inline-block;
+      a {
+        width: 64px;
+        line-height: 26px;
+        border: 1px solid #202020;
+        text-align: center;
+        border-radius: 5px;
+        margin-left: 15px;
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+      .active {
+        background: #202020;
+        display: none;
+      }
+    }
+    @media (max-width: 992px) {
+      .nav-header {
+        display: block;
+        text-align: center;
+      }
+      .navbar-main {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+      }
 
-    .nav-header {
-      display: block;
-      text-align: center;
     }
-    .navbar-main {
-      text-align: left;
+    @media (max-width: 768px) {
+
+      .nav-header {
+        display: block;
+        text-align: center;
+      }
+      .navbar-main {
+        text-align: left;
+      }
+      .nav-main {
+        display: block;
+        margin: 0;
+        li {
+          display: block;
+          width: 100%;
+          >a {
+            width: 100%;
+            border-radius: 0;
+          }
+        }
+      }
+      .right-panel {
+        position: inherit;
+        right: 0;
+        top: 0;
+        text-align: right;
+      }
+      .item-sign {
+        display: block;
+        margin: 0;
+        a {
+          display: block;
+          margin: 0;
+          padding-right: 15px;
+          line-height: 33px;
+        }
+      }
+      .item-lang {
+        position: absolute;
+        top: 22px;
+        right: 10px;
+        .active {
+          display: none;
+        }
+      }
     }
-    .nav-main {
-      display: block;
-      margin: 0;
-    li {
-      display: block;
-      width: 100%;
-  >a {
-     width: 100%;
-     border-radius: 0;
-   }
-  }
-  }
-  .right-panel {
-    position: inherit;
-    right: 0;
-    top: 0;
-    text-align: right;
-  }
-  .item-sign {
-    display: block;
-    margin: 0;
-  a {
-    display: block;
-    margin: 0;
-    padding-right: 15px;
-    line-height: 33px;
-  }
-  }
-  .item-lang {
-    position: absolute;
-    top: 22px;
-    right: 10px;
-  .active {
-    display: none;
-  }
-  }
-  }
   }
   .logo-head {
     display: inline-block;
@@ -235,7 +210,7 @@
   }
   .logo-head__simple {
     display: none;
-    width: 90px;
+    width: 102.8px;
   }
   .navbar-top {
     font-size: 10.3px;
@@ -264,7 +239,7 @@
       margin-top: 30px;
     }
     li {
-      background: url("../../assets/images/head-top__icon.png") left bottom no-repeat;
+      background: url("../../assets/images/icon/i-triangle.png") left bottom no-repeat;
       padding-left: 25px;
       margin-bottom: 10px;
       &.active {
@@ -324,14 +299,14 @@
     li {
       display: inline-block;
       margin-right: 18px;
-    >a {
-       line-height: 33px;
-       padding: 0 20px;
-       border-radius: 3px;
-      &.router-link-exact-active,&:hover {
-        background: #202020;
+      >a {
+        line-height: 33px;
+        padding: 0 20px;
+        border-radius: 3px;
+        &.router-link-exact-active,&:hover {
+          background: #202020;
+        }
       }
-     }
     }
   }
   $general-transition-speed: .4s;
@@ -496,7 +471,16 @@
     }
   }
 
-
+  @media (max-width: 1200px){
+    .navbar-nav__main li a {
+      padding: 0 35px;
+    }
+  }
+  @media (max-width: 992px){
+    .navbar-nav__main li a {
+      padding: 0 18px;
+    }
+  }
   @media (max-width: 768px) {
     #header {
       position: fixed;
@@ -508,7 +492,10 @@
     .navbar-top {
       text-align: center;
       height: auto;
-      padding: 15px 0;
+      /*padding: 15px 0;*/
+      >.wrap1200 {
+        padding: 21px 0;
+      }
     }
     .logo-head {
       display: none;
@@ -529,7 +516,7 @@
         }
       }
       .navbar__active & {
-        height: 250px;
+        height: 280px;
         overflow: auto;
       }
     }
@@ -540,12 +527,14 @@
       display: none;
     }
     .navbar-top__right {
-      top: 0;
+      top: 3px;
       ul {
-        display: inline-block;
+        /*display: inline-block;*/
+        display: block;
         margin: 0;
       }
       .language-trigger {
+        margin-bottom: 20px;
         .active {
           display: none;
         }

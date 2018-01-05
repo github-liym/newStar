@@ -123,6 +123,10 @@
   .clearfix{
     zoom:1;
   }
+  .omit {
+    max-width: 100%;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
   .fl {
     float: left;
   }
@@ -131,11 +135,8 @@
   }
   .fullScreen {
     height: 100%;
-    padding-top: 69px;
-    @media (max-width: 992px) {
-      padding-top: 102px;
-    }
-    padding-bottom: 101px;
+    padding-top: 300px;
+    padding-bottom: 62px;
     #header {
       position: fixed;
       top: 0;
@@ -148,6 +149,10 @@
       left: 0;
       width: 100%;
     }
+    @media (max-width: 768px) {
+      padding-bottom: 80px;
+    }
+
   }
   .cover {
     background: center;

@@ -6,20 +6,24 @@
         "path": "/"
       },
       {
-        "name": "大赛内容",
-        "path": "/content"
+        "name": "关于NewStar",
+        "path": ""
       },
       {
-        "name": "奖项奖励",
-        "path": "/awards"
+        "name": "新闻中心",
+        "path": ""
       },
       {
-        "name": "大赛评委",
-        "path": "/judges"
+        "name": "专家库",
+        "path": ""
       },
       {
-        "name": "获奖作品",
-        "path": "/works"
+        "name": "线上展览",
+        "path": ""
+      },
+      {
+        "name": "参赛作品",
+        "path": ""
       }
     ],
     "sign": {
@@ -29,33 +33,49 @@
       }
     },
     "footer": {
+      "nav":[
+        {
+          "title": "关于NewStar",
+          "href": "/aboutUs"
+        },
+        {
+          "title": "联系我们",
+          "href": "/aboutUs"
+        },
+        {
+          "title": "法律声明",
+          "href": "/aboutUs"
+        }
+      ],
       "copyright": "版权所有 91Ant.Copyright © 2013.All rights reserved.",
-      "company": "佛山市蚂蚁雄兵网络科技有限公司",
-      "numberLabel": "备案号",
       "number": "粤ICP备13078953号-1"
     }
   },
   "en": {
     "nav": [
       {
-        "name": "Home",
+        "name": "首页",
         "path": "/"
       },
       {
-        "name": "Content",
-        "path": "/content"
+        "name": "关于NewStar",
+        "path": ""
       },
       {
-        "name": "Awards",
-        "path": "/awards"
+        "name": "新闻中心",
+        "path": ""
       },
       {
-        "name": "Judges",
-        "path": "/judges"
+        "name": "专家库",
+        "path": ""
       },
       {
-        "name": "Works",
-        "path": "/works"
+        "name": "线上展览",
+        "path": ""
+      },
+      {
+        "name": "参赛作品",
+        "path": ""
       }
     ],
     "sign": {
@@ -65,9 +85,21 @@
       }
     },
     "footer": {
-      "copyright": "版权所有 91Ant.Copyright © 2013.All rights reserved.",
-      "company": "佛山市蚂蚁雄兵网络科技有限公司",
-      "numberLabel": "备案号",
+      "nav":[
+        {
+          "title": "关于NewStar",
+          "href": "/aboutUs"
+        },
+        {
+          "title": "联系我们",
+          "href": "/aboutUs"
+        },
+        {
+          "title": "法律声明",
+          "href": "/aboutUs"
+        }
+      ],
+      "copyright": "Copyright © 2017 Design Intellgence Award. All rights reserved",
       "number": "粤ICP备13078953号-1"
     }
   }

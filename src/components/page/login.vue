@@ -1,67 +1,113 @@
 <template>
-	<div class="login fullPage">
-    <div class="inner">
-      {{loginForm}}
-      <div class="login-form__wrap">
-        <div class="login-form__header">报名</div>
-        <el-form :model="loginForm" :rules="rules" ref="loginForm" class="login-form">
-          <el-form-item prop="phoneNumber">
-            <el-input size="medium" v-model="loginForm.phoneNumber" placeholder="请输入手机号码"  suffix-icon="el-icon-mobile-phone"></el-input>
-          </el-form-item>
-          <el-form-item class="form-item__last" prop="code">
-            <el-col :span="13">
-              <el-input size="medium" placeholder="请输入验证码" v-model="loginForm.code"></el-input>
-            </el-col>
-            <el-col :span="1"><div class="grid-content bg-purple-light">&nbsp;</div></el-col>
-            <el-col :span="10">
-              <el-button size="medium">发送验证码</el-button>
-            </el-col>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary">报名</el-button>
-          </el-form-item>
-        </el-form>
-      </div>
-
-    </div>
-	</div>
+  <Form ref="formCustom" :model="formCustom" :rules="ruleCustom">
+    <FormItem prop="tel">
+      <Input type="text" v-model="formCustom.tel" placeholder="手机号码"></Input>
+    </FormItem>
+    <FormItem prop="code" :class="{'ivu-form-item-error': codeErr }">
+      <Input type="password"  v-model="formCustom.code" placeholder="验证码"></Input>
+      <Button @click="sendCode()" :disabled="isSend">
+        <span v-if="!isSend">发送验证码</span>
+        <span v-else>重新发送（{{coutDown}}）</span>
+      </Button>
+      <div v-if="codeErr" class="ivu-form-item-error-tip">验证码错误</div>
+    </FormItem>
+    <FormItem>
+      <Button type="primary" @click="handleSubmit('formCustom')">登录</Button>
+    </FormItem>
+  </Form>
 </template>
-
 <script>
-	export default {
-		name: 'Login',
-    data() {
-			var validatePhone = (rule, value, callback) => {
-        if (!value) {
-          return callback(new Error('手机号码不能为空'));
+  export default {
+    data () {
+      const validateTel = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('手机号码不能为空'));
+        }else if(!/^1[34578]\d{9}$/.test(value)) {
+          callback(new Error('手机号码格式错误'));
+        }else {
+          callback();
         }
       };
-			var validateCode = (rule, value, callback) => {
+      const validateCode = (rule, value, callback) => {
         if (!value) {
-          console.log("if")
           return callback(new Error('验证码不能为空'));
         }else {
-        	console.log("else")
+          callback();
         }
       };
-      return {
-        loginForm: {
-          phoneNumber: '',
-          codeInit: '',
-          code: '',
-        },
-        rules: {
-        	phoneNumber: [
-            { validator: validatePhone, trigger: 'blur' }
-          ],
-        	code: [
-            { validator: validateCode, trigger: 'blur' }
-          ],
 
+      return {
+      	coutDown: 60,
+        isSend: false,
+        codeErr: false,
+        formCustom: {
+          tel: '',
+          code: ''
+        },
+        ruleCustom: {
+          tel: [
+            { validator: validateTel, trigger: 'blur' }
+          ],
+          code: [
+            { validator: validateCode, trigger: 'blur' },
+          ]
         }
-      };
+      }
+    },
+    methods: {
+      sendCode () {
+        var self = this;
+        self.isSend = true;
+        var countdown = function () {
+          setTimeout(function () {
+            if (self.coutDown>0){
+              self.coutDown--;
+            }else {
+
+            }
+
+            countdown();
+          },1000);
+        };
+
+      },
+      handleSubmit (name) {
+        var self = this;
+        this.$refs[name].validate((valid) => {
+          if (valid) {
+            this.$http({
+              method: 'post',
+              url: '/api/index/signup_handle',
+              headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Content-Type': 'application/json; charset=UTF-8',
+                'Access-Control-Allow-Origin': '*'
+              },
+              data: {
+                mobile: this.formCustom.tel,
+                mcode: this.formCustom.code
+              }
+            })
+              .then(function (res) {
+                console.log(res);
+                if (res.data == "mobile error"){
+                	self.codeErr = true;
+                }else {
+                  self.codeErr = false;
+                  console.log("登录成功")
+                }
+              })
+              .catch(function (error) {
+                console.log(error)
+
+              });
+          } else {
+//            this.$Message.error('验证码错误');
+          }
+        })
+      }
     }
-	}
+  }
 </script>
 
 <style lang="scss" scoped>

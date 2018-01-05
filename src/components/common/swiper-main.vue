@@ -21,7 +21,8 @@
           },
           centeredSlides: true,
           pagination: {
-            el: '.swiper-main__pagination'
+            el: '.swiper-main__pagination',
+            clickable :true,
           }
         }
       }
@@ -50,7 +51,18 @@
         background: #fff;
       }
     }
+    @media (max-width: 768px) {
+
+      .swiper-main__pagination {
+        .swiper-pagination-bullet {
+          width: 8px;
+          height: 8px;
+
+        }
+      }
+    }
   }
+
 
 
 

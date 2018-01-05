@@ -5,17 +5,22 @@ import App from './App'
 import router from './router'
 // import ElementUI from 'element-ui'
 // import 'element-ui/lib/theme-chalk/index.css'
-// import '@/assets/lib/element-#494949/index.css'
+import axios from 'axios'
+Vue.prototype.$http = axios
 
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 import 'swiper/dist/css/swiper.css'
 
+import iView from 'iview'
+import 'iview/dist/styles/iview.css';
+
 // import sass from './assets/css/base.scss'
 
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 // Vue.use(ElementUI);
 Vue.use(VueAwesomeSwiper);
+Vue.use(iView);
 
 
 

@@ -190,7 +190,7 @@
       margin-top: 30px;
     }
     li {
-      background: url("../../assets/images/head-top__icon.png") left bottom no-repeat;
+      background: url("../../assets/images/icon/i-triangle.png") left bottom no-repeat;
       padding-left: 25px;
       margin-bottom: 10px;
       &.active {
