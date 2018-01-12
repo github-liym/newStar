@@ -1,21 +1,25 @@
 <template>
-  <header id="header" class="navbar" :class="{'navbar__active': isActive}">
-    <div class="navbar-top">
+	<header id="header" class="navbar" :class="{'navbar__active': isActive}">
+    <div ref="headerTop" class="navbar-top">
       <div class="wrap1200">
-        <img class="logo-head" src="../../assets/images/logo-head.png"/>
+        <router-link :to="{path: '/'}"><img class="logo-head" src="../../assets/images/logo-head.png"/></router-link>
         <router-link :to="{path: '/'}"><img class="logo-head__simple" src="../../assets/images/logo.png"/></router-link>
         <div class="navbar-top__right">
-          <ul class="language-trigger">
+          <!--<ul class="language-trigger">
             <li :class="{active: language=='zh'}">
               <a href="javascript:"  @click="setLanguage('zh')"><strong>中文</strong></a>
             </li>
             <li :class="{active: language=='en'}">
               <a href="javascript:"  @click="setLanguage('en')">English</a>
             </li>
-          </ul>
+          </ul>-->
           <ul>
-            <li v-for="item in nav.sign" class="active">
+            <li v-for="item in nav.sign" class="active" v-if="!$store.state.user">
               <router-link :to="{path: item.path}"  @click.native="closeNav"><strong>{{item.name}}</strong></router-link>
+            </li>
+            <li v-else class="userItem">
+              <router-link class="username omit" :to="{path: '/user'}"  @click.native="closeNav"><strong>{{$store.state.user}}</strong></router-link>
+              <a href="javascript:" @click="loginout()">退出</a>
             </li>
           </ul>
         </div>
@@ -24,27 +28,33 @@
     </div>
     <div class="navbar-inner">
       <ul class="navbar-nav__main">
-        <li v-for="item in nav.item">
-          <router-link :to="{path: item.path}" @click.native="closeNav">{{item.name}}</router-link>
+        <li v-for="item in nav.item" v-if="$store.state.user||item.path!='/user'" :class="{active: false}">
+          <!--{{item}}-->
+          <router-link v-if="!item.children" :to="{path: item.path}" @click.native="closeNav">{{item.name}}</router-link>
+          <router-link v-else :to="{path: item.path}">{{item.name}}</router-link>
+          <ul v-if="item.children" class="navbar-nav__sub">
+            <li v-for="itemSub in item.children">
+              <router-link :to="{path: itemSub.path}" @click.native="closeNav">{{itemSub.name}}</router-link>
+            </li>
+          </ul>
         </li>
       </ul>
-      <div class="navbar-search">
+     <!-- <div class="navbar-search">
         <input type="text" class="search-controller">
         <i class="icon i-search"></i>
-      </div>
+      </div>-->
     </div>
   </header>
 </template>
 
 <script>
-  import store from '@/vuex/store';
-  export default {
-    name: 'Header',
+	export default {
+		name: 'Header',
     props: ['nav','language'],
-    store,
     data: function () {
+//			console.log(this.$route)
       return {
-        isActive: false
+      	isActive: false
       }
     },
     methods: {
@@ -56,6 +66,10 @@
       },
       closeNav(){
         this.isActive = false
+      },
+      loginout(){
+        this.$store.commit('loginout')
+        this.$router.push({path: '/login'})
       }
     }
   }
@@ -64,144 +78,153 @@
 <style lang="scss">
   #app {
     @media (max-width: 768px) {
-      padding-top: 75px;
+      padding-top: 59.27px;
     }
+  }
+  .userItem {
+    a {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+  .username {
+    max-width: 70px;
   }
   .newstar {
     display: inline-block;
     width: 137px;
     background: url("../../assets/images/logo.png") no-repeat center;
     background-size: 100% auto;
-    &:before {
-      content: '';
-      display: block;
-      padding-top: (40/137)*100%;
-    }
+  &:before {
+     content: '';
+     display: block;
+     padding-top: (40/137)*100%;
+   }
   }
   .navbar {
     background: #323232;
     color: #fff;
-    .navbar-inner {
-      position: relative;
-      max-width: 1200px;
-      width: 100%;
-      margin: 0 auto;
-      @media (max-width: 1200px) {
-        width: 970px;
-      }
-      @media (max-width: 992px) {
-        width: 750px;
-      }
-      @media (max-width: 768px) {
-        width: 100%;
-      }
-    }
-    .nav-header {
+  .navbar-inner {
+    position: relative;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+  @media (max-width: 1200px) {
+    width: 970px;
+  }
+  @media (max-width: 992px) {
+    width: 750px;
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+  }
+  .nav-header {
+    display: inline-block;
+  }
+  .navbar-main {
+    display: inline-block;
+    margin-left: 50px;
+
+  }
+  .newstar {
+    vertical-align: middle;
+    padding: 14.5px 0;
+  }
+  .right-panel {
+    position: absolute;
+    top: 22px;
+    right: 0;
+  //margin-top: 22px;
+    font-size: 12px;
+  }
+  .item-sign {
+    display: inline-block;
+    margin-right: 20px;
+    li {
       display: inline-block;
+    }
+  a {
+    line-height: 26px;
+    margin-left: 15px;
+  }
+  }
+  .item-lang {
+    display: inline-block;
+    a {
+      width: 64px;
+      line-height: 26px;
+      border: 1px solid #202020;
+      text-align: center;
+      border-radius: 5px;
+      margin-left: 15px;
+      &:first-child {
+         margin-left: 0;
+       }
+  }
+  .active {
+    background: #202020;
+    display: none;
+  }
+  }
+  @media (max-width: 992px) {
+    .nav-header {
+      display: block;
+      text-align: center;
     }
     .navbar-main {
-      display: inline-block;
-      margin-left: 50px;
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+    }
 
-    }
-    .newstar {
-      vertical-align: middle;
-      padding: 14.5px 0;
-    }
-    .right-panel {
-      position: absolute;
-      top: 22px;
-      right: 0;
-      //margin-top: 22px;
-      font-size: 12px;
-    }
-    .item-sign {
-      display: inline-block;
-      margin-right: 20px;
-      li {
-        display: inline-block;
-      }
-      a {
-        line-height: 26px;
-        margin-left: 15px;
-      }
-    }
-    .item-lang {
-      display: inline-block;
-      a {
-        width: 64px;
-        line-height: 26px;
-        border: 1px solid #202020;
-        text-align: center;
-        border-radius: 5px;
-        margin-left: 15px;
-        &:first-child {
-          margin-left: 0;
-        }
-      }
-      .active {
-        background: #202020;
-        display: none;
-      }
-    }
-    @media (max-width: 992px) {
-      .nav-header {
-        display: block;
-        text-align: center;
-      }
-      .navbar-main {
-        display: block;
-        margin: 0 auto;
-        text-align: center;
-      }
+  }
+  @media (max-width: 768px) {
 
+    .nav-header {
+      display: block;
+      text-align: center;
     }
-    @media (max-width: 768px) {
-
-      .nav-header {
-        display: block;
-        text-align: center;
-      }
-      .navbar-main {
-        text-align: left;
-      }
-      .nav-main {
-        display: block;
-        margin: 0;
-        li {
-          display: block;
-          width: 100%;
-          >a {
-            width: 100%;
-            border-radius: 0;
-          }
-        }
-      }
-      .right-panel {
-        position: inherit;
-        right: 0;
-        top: 0;
-        text-align: right;
-      }
-      .item-sign {
-        display: block;
-        margin: 0;
-        a {
-          display: block;
-          margin: 0;
-          padding-right: 15px;
-          line-height: 33px;
-        }
-      }
-      .item-lang {
-        position: absolute;
-        top: 22px;
-        right: 10px;
-        .active {
-          display: none;
-        }
-      }
+    .navbar-main {
+      text-align: left;
     }
+    .nav-main {
+      display: block;
+      margin: 0;
+    li {
+      display: block;
+      width: 100%;
+  >a {
+     width: 100%;
+     border-radius: 0;
+   }
+  }
+  }
+  .right-panel {
+    position: inherit;
+    right: 0;
+    top: 0;
+    text-align: right;
+  }
+  .item-sign {
+    display: block;
+    margin: 0;
+  a {
+    display: block;
+    margin: 0;
+    padding-right: 15px;
+    line-height: 33px;
+  }
+  }
+  .item-lang {
+    position: absolute;
+    top: 22px;
+    right: 10px;
+  .active {
+    display: none;
+  }
+  }
+  }
   }
   .logo-head {
     display: inline-block;
@@ -210,7 +233,7 @@
   }
   .logo-head__simple {
     display: none;
-    width: 102.8px;
+    width: 90px;
   }
   .navbar-top {
     font-size: 10.3px;
@@ -237,6 +260,7 @@
     text-align: left;
     ul {
       margin-top: 30px;
+      margin-top: 120px;
     }
     li {
       background: url("../../assets/images/icon/i-triangle.png") left bottom no-repeat;
@@ -250,7 +274,7 @@
   .navbar-nav__main {
     display: inline-block;
     line-height: 60px;
-    li {
+    >li {
       position: relative;
       display: inline-block;
       &:after {
@@ -263,9 +287,34 @@
         margin-top: -7px;
         background: #fff;
       }
-      a {
+      &:hover,&.active {
+        .navbar-nav__sub {
+          display: block;
+        }
+        > a {
+          color: #fabf1b;
+        }
+      }
+      >a {
         display: block;
         padding: 0 40px;
+      }
+    }
+  }
+  .navbar-nav__sub {
+    display: none;
+    position: absolute;
+    left: 50%;
+    z-index: 2;
+    background: #333;
+    width: 100px;
+    transform: translateX(-50%);
+    box-shadow: inset 0px 3px 10px 0px #242424;
+    li {
+      line-height: (40/14);
+      text-align: center;
+      &:hover {
+        color: #fabf1b;
       }
     }
   }
@@ -284,9 +333,9 @@
   .search-controller {
     display: block;
     width: 140px;
-    height: 18px;
+    height: 24px;
     font-size: 11px;
-    line-height: 18px;
+    line-height: 24px;
     border: 0;
     background: url("../../assets/images/search-box__bg.png") no-repeat center;
     background-size: 100% 100%;
@@ -299,14 +348,14 @@
     li {
       display: inline-block;
       margin-right: 18px;
-      >a {
-        line-height: 33px;
-        padding: 0 20px;
-        border-radius: 3px;
-        &.router-link-exact-active,&:hover {
-          background: #202020;
-        }
+    >a {
+       line-height: 33px;
+       padding: 0 20px;
+       border-radius: 3px;
+      &.router-link-exact-active,&:hover {
+        background: #202020;
       }
+     }
     }
   }
   $general-transition-speed: .4s;
@@ -471,14 +520,22 @@
     }
   }
 
-  @media (max-width: 1200px){
-    .navbar-nav__main li a {
-      padding: 0 35px;
+  @media (max-width: 1200px) {
+    .navbar-nav__main {
+      >li {
+        >a {
+          padding: 0 30px;
+        }
+      }
     }
   }
-  @media (max-width: 992px){
-    .navbar-nav__main li a {
-      padding: 0 18px;
+  @media (max-width: 992px) {
+    .navbar-nav__main {
+      >li {
+        >a {
+          padding: 0 15px;
+        }
+      }
     }
   }
   @media (max-width: 768px) {
@@ -487,15 +544,12 @@
       top: 0;
       left: 0;
       width: 100%;
-      z-index: 3;
+      z-index: 8;
     }
     .navbar-top {
       text-align: center;
       height: auto;
-      /*padding: 15px 0;*/
-      >.wrap1200 {
-        padding: 21px 0;
-      }
+      padding: 15px 0;
     }
     .logo-head {
       display: none;
@@ -516,7 +570,7 @@
         }
       }
       .navbar__active & {
-        height: 280px;
+        height: 270px;
         overflow: auto;
       }
     }
@@ -527,18 +581,34 @@
       display: none;
     }
     .navbar-top__right {
-      top: 3px;
+      top: 0;
       ul {
-        /*display: inline-block;*/
-        display: block;
+        display: inline-block;
         margin: 0;
       }
       .language-trigger {
-        margin-bottom: 20px;
         .active {
           display: none;
         }
       }
+    }
+    .navbar-top__right {
+      li {
+        padding-left: 15px;
+      }
+    }
+    .navbar-nav__sub {
+      position: relative;
+      left: 0;
+      transform: translateX(0);
+      width: 100%;
+      li {
+        text-align: left;
+        a {
+          padding: 0 30px;
+        }
+      }
+
     }
   }
 

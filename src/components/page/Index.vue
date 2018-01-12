@@ -1,68 +1,95 @@
 <template>
   <div id="index">
-    <bannerMain :swiperData = "banner"></bannerMain>
-    <div class="online-exhibition__wrap wrap1200">
-      <h2 class="title-simple">线上展览</h2>
-      <onlineExhibition class="online-exhibition" :swiperData = "onlineExhibition"></onlineExhibition>
-    </div>
-    <div class="news-wrap">
+    <bannerMain :swiperData = "option[$store.state.language].banner"></bannerMain>
+    <div class="online-exhibition__wrap" v-show="option[$store.state.language].onlineExhibition">
       <div class="wrap1200">
-        <h2 class="title-simple ">新闻动态</h2>
-        <news class="news-list__wrap" :news="news"></news>
+        <onlineExhibition class="online-exhibition" :swiperData = "option[$store.state.language].onlineExhibition"></onlineExhibition>
       </div>
     </div>
-    <div class="expert-library__wrap wrap1200">
-      <h2 class="title-simple">专家库</h2>
-      <swiper class="expert-list__wrap" :options="expertSwiperOption">
-        <swiper-slide v-for="(item1,index) in expert" :key="index">
-          <div class="expert-item__wrap" v-for="item in item1">
-            <expert :expert="item"></expert>
-          </div>
-        </swiper-slide>
-        <div class="expert-library__pagination swiper-pagination" slot="pagination"></div>
-      </swiper>
+    <div class="news-wrap" v-show="option[$store.state.language].news">
+      <div class="wrap1200">
+        <h2 class="title-simple ">大赛动态 | Competition dynamics</h2>
+        <news class="news-list__wrap" :news="option[$store.state.language].news"></news>
+      </div>
+    </div>
+    <div class="expert-library__wrap wrap1200"  v-show="option[$store.state.language].expertInit">
+      <h2 class="title-simple">大师库 | Master library</h2>
+      <div class="expert-list__wrap clearfix" :options="expertSwiperOption">
+        <div class="expert-item__wrap" v-for="item in option[$store.state.language].expertInit">
+          <expert :expert="item"></expert>
+        </div>
+      </div>
     </div>
     <div class="partner-wrap">
       <div class="wrap1200">
         <div class="partner-list">
           <div class="partner-item">
-            <h3>主办单位</h3>
-            <ul class="">
-              <li  v-for="item in partner['主办单位']">{{item}}</li>
+            <h3>{{option[$store.state.language].partner[0].title[0]}}</h3>
+            <ul>
+              <li  v-for="item in option[$store.state.language].partner[0].list">{{item}}</li>
             </ul>
           </div>
           <div class="partner-item">
-            <h3>联合协办</h3>
-            <ul class="">
-              <li  v-for="item in partner['联合协办']">{{item}}</li>
+            <h3>{{option[$store.state.language].partner[1].title[0]}}</h3>
+            <ul>
+              <li  v-for="item in option[$store.state.language].partner[1].list">{{item}}</li>
+            </ul>
+          </div>
+          <div class="partner-item">
+            <h3>{{option[$store.state.language].partner[2].title[0]}}</h3>
+            <ul>
+              <li  v-for="item in option[$store.state.language].partner[2].list">{{item}}</li>
+            </ul>
+          </div>
+          <div class="partner-item">
+            <h3>{{option[$store.state.language].partner[5].title[0]}}</h3>
+            <ul>
+              <li  v-for="item in option[$store.state.language].partner[5].list">{{item}}</li>
             </ul>
           </div>
         </div>
         <div class="partner-list">
           <div class="partner-item">
-            <h3>战略合作</h3>
-            <ul class="">
-              <li  v-for="item in partner['战略合作']">{{item}}</li>
+            <h3>{{option[$store.state.language].partner[3].title[0]}}</h3>
+            <ul>
+              <li  v-for="item in option[$store.state.language].partner[3].list">{{item}}</li>
             </ul>
           </div>
           <div class="partner-item">
-            <h3>合作媒体</h3>
-            <ul class="">
-              <li  v-for="item in partner['合作媒体']">{{item}}</li>
+            <h3>{{option[$store.state.language].partner[6].title[0]}}</h3>
+            <ul>
+              <li  v-for="item in option[$store.state.language].partner[6].list">{{item}}</li>
+            </ul>
+          </div>
+          <div class="partner-item">
+            <h3>{{option[$store.state.language].partner[7].title[0]}}</h3>
+            <ul>
+              <li  v-for="item in option[$store.state.language].partner[7].list">{{item}}</li>
+            </ul>
+          </div>
+          <div class="partner-item">
+            <h3>{{option[$store.state.language].partner[8].title[0]}}</h3>
+            <ul>
+              <li  v-for="item in option[$store.state.language].partner[8].list">{{item}}</li>
+            </ul>
+          </div>
+          <div class="partner-item">
+            <h3>{{option[$store.state.language].partner[9].title[0]}}</h3>
+            <ul>
+              <li  v-for="item in option[$store.state.language].partner[9].list">{{item}}</li>
             </ul>
           </div>
         </div>
         <div class="partner-list">
           <div class="partner-item">
-            <h3>行业合作</h3>
-            <ul class="">
-              <li  v-for="item in partner['行业合作']">{{item}}</li>
+            <h3>{{option[$store.state.language].partner[4].title[0]}}</h3>
+            <ul>
+              <li  v-for="item in option[$store.state.language].partner[4].list">{{item}}</li>
             </ul>
           </div>
         </div>
 
       </div>
-
     </div>
   </div>
 </template>
@@ -73,198 +100,62 @@
   import news from '@/components/common/news.vue'
   import expert from '@/components/common/expert.vue'
 
+
 	export default {
 		name: 'index',
     data: function () {
       return {
-      	banner: [
-          {
-            url: '/static/images/index_banner.jpg'
+      	option: {
+      		zh: {
+            onlineExhibition: [],
+            partner: [
+            	{ "title": [], "list": [] },
+            	{ "title": [], "list": [] },
+            	{ "title": [], "list": [] },
+            	{ "title": [], "list": [] },
+            	{ "title": [], "list": [] },
+            	{ "title": [], "list": [] },
+            	{ "title": [], "list": [] },
+            	{ "title": [], "list": [] },
+            	{ "title": [], "list": [] },
+            	{ "title": [], "list": [] },
+            ]
           },
-          {
-          	url: '/static/images/index_banner.jpg'
-          },
-          {
-            url: '/static/images/index_banner.jpg'
+      		en: {
+            onlineExhibition: [],
+            partner: [
+              { "title": [], "list": [] },
+              { "title": [], "list": [] },
+              { "title": [], "list": [] },
+              { "title": [], "list": [] },
+              { "title": [], "list": [] },
+              { "title": [], "list": [] },
+              { "title": [], "list": [] },
+              { "title": [], "list": [] },
+              { "title": [], "list": [] },
+              { "title": [], "list": [] },
+            ]
           }
-        ],
-        onlineExhibition: [
-          {
-          	url: '/static/images/index-exhibition.jpg',
-            text: '往届NewStar颁奖典礼1'
-          },
-          {
-          	url: '/static/images/index-exhibition.jpg',
-            text: '往届NewStar颁奖典礼2'
-          },
-          {
-          	url: '/static/images/index_banner.jpg',
-            text: '往届NewStar颁奖典礼3'
-          }
-        ],
-        news: [
-          {
-            href: "",
-            cover: '/static/images/login-bg.jpg',
-            title: "2018NewStar新星设计奖参赛指南",
-            time: '201-2-1',
-            desc: ''
-          },
-          {
-            href: "",
-            cover: '/static/images/news-cover.jpg',
-            title: "2018NEWSTAR国际设计大奖全球征集发布会2018NEWSTAR国际设计大奖全球征集发布会",
-            time: '201-2-1',
-            desc: '2018NEWSTAR国际设计大奖全球征集于2017年9月19日晚上19点30分在中国杭州武林广场举行盛大发布会，即时开始全球征集。征集期为：2017年9月19日－2018年9月19日。'
-          }
-        ],
+        },
         expertSwiperOption: {
-      		speed: 800,
+          speed: 800,
           pagination: {
             el: '.expert-library__pagination',
             clickable :true,
           }
-        },
-        expertInit: [
-          {
-          	cover: "/static/images/expert-cover.png",
-          	name: "柳冠中",
-            from: '中国'
-          },
-          {
-          	cover: "/static/images/expert-cover.png",
-          	name: "柳冠中",
-            from: '中国'
-          },
-          {
-          	cover: "/static/images/expert-cover.png",
-          	name: "柳冠中",
-            from: '中国'
-          },
-          {
-          	cover: "/static/images/expert-cover.png",
-          	name: "柳冠中",
-            from: '中国'
-          },
-          {
-          	cover: "/static/images/expert-cover.png",
-          	name: "柳冠中",
-            from: '中国'
-          },
-          {
-          	cover: "/static/images/expert-cover.png",
-          	name: "柳冠中",
-            from: '中国'
-          },
-          {
-          	cover: "/static/images/expert-cover.png",
-          	name: "柳冠中",
-            from: '中国'
-          },
-          {
-          	cover: "/static/images/expert-cover.png",
-          	name: "柳冠中",
-            from: '中国'
-          },
-          {
-          	cover: "/static/images/expert-cover.png",
-          	name: "柳冠中",
-            from: '中国'
-          },
-          {
-          	cover: "/static/images/expert-cover.png",
-          	name: "柳冠中",
-            from: '中国'
-          },
-          {
-          	cover: "/static/images/expert-cover.png",
-          	name: "柳冠中",
-            from: '中国'
-          },
-          {
-          	cover: "/static/images/expert-cover.png",
-          	name: "柳冠中",
-            from: '中国'
-          },
-          {
-          	cover: "/static/images/expert-cover.png",
-          	name: "柳冠中",
-            from: '中国'
-          },
-          {
-          	cover: "/static/images/expert-cover.png",
-          	name: "柳冠中",
-            from: '中国'
-          },
-          {
-          	cover: "/static/images/expert-cover.png",
-          	name: "柳冠中",
-            from: '中国'
-          },
-          {
-          	cover: "/static/images/expert-cover.png",
-          	name: "柳冠中",
-            from: '中国'
-          },
-          {
-          	cover: "/static/images/expert-cover.png",
-          	name: "柳冠中",
-            from: '中国'
-          },
-          {
-          	cover: "/static/images/expert-cover.png",
-          	name: "柳冠中",
-            from: '中国'
-          },
-          {
-          	cover: "/static/images/expert-cover.png",
-          	name: "柳冠中",
-            from: '中国'
-          },
-          {
-          	cover: "/static/images/expert-cover.png",
-          	name: "柳冠中",
-            from: '中国'
-          },
-          {
-          	cover: "/static/images/expert-cover.png",
-          	name: "柳冠中",
-            from: '中国'
-          },
-          {
-          	cover: "/static/images/expert-cover.png",
-          	name: "柳冠中",
-            from: '中国'
-          },
-          {
-          	cover: "/static/images/expert-cover.png",
-          	name: "最后一个",
-            from: '中国'
-          }
-        ],
-        partner: {
-          "主办单位":["澳大利亚设计基金会","蚂蚁雄兵"],
-          "联合协办":["大沥镇人民政府 ","南方日报"],
-          "战略合作":["中国高等教育学会","浙江广播电视集团","阿里巴巴","网易","新浪","艺创小镇","云栖小镇","梦栖小镇"],
-          "合作媒体":["浙江卫视","网易设计","新浪家居","domus 国际中文版","动点科技","视觉ME","设计与制造"],
-          "行业合作":["日本工业设计师协会","韩国设计振兴院","韩国首尔设计中心","韩国用户体验协会","奥地利设计协会","英国伦敦设计师部落","开普敦联合会","中国电器工业协会","中意设计创新中心","浙江省工业设计协会","广东省工业设计协会","湖南省工业设计协会","台湾工业设计协会","首尔设计节","北京设计周","深圳设计周","米兰设计周","伦敦设计周","赫尔辛基设计周","中国设计红星奖"]
         }
       }
     },
-    computed: {
-      expert: function () {
-        var slidesPerView = 12;
-        var k =0;
-        var expertTemp =[];
-        for(var i=0;i<this.expertInit.length;i=i+slidesPerView){
-          expertTemp[k] = [];
-          for(var j=i;j<i+slidesPerView&&j<this.expertInit.length;j++){
-            expertTemp[k].push(this.expertInit[j])
-          }
-          k++;
-        }
-        return expertTemp
-      }
+    mounted(){
+			var self = this;
+			self.$http({
+        method: 'post',
+        url: '/api/index/index'
+      }).then(function (res) {
+      	self.option = res.data;
+      }).catch(function (err) {
+        console.log(err)
+      })
     },
     components: {
       onlineExhibition,bannerMain,news,expert
@@ -275,11 +166,7 @@
 
 <style lang="scss">
   #index {
-    .title-simple {
-      padding: 40px 0 20px;
-      margin: 0 auto;
-      font-size: 18px;
-    }
+    background: #f7f8f8;
     .carousel-main {
       .el-carousel__button {
         width: 10px;
@@ -319,21 +206,23 @@
         }
       }
     }
-    .wrap1200 {
-      padding: 0 30px;
+    .online-exhibition__wrap {
+      padding-top: 40px;
     }
     .news-wrap {
       padding-bottom: 25px;
-      background: #f7f8f8;
+      background: #fff;
     }
     .expert-list__wrap {
       margin: 0 -10px;
       padding-bottom: 60px;
+      background: #f7f8f8;
     }
     .expert-item__wrap {
       float: left;
       width: 16.66666%;
       padding: 0 10px;
+      margin-bottom: 10px;
     }
     .expert-library__pagination {
       bottom: 40px;
@@ -347,13 +236,13 @@
       padding: 30px 0 1px;
       font-size: 0;
       h3 {
-        margin: 0 0 15px;
+        margin: 0 0 10px;
         font-size: 18px;
         color: #fabf1b;
       }
       li {
         line-height: (20/16);
-        margin-bottom: 10px;
+        margin-bottom: 9px;
       }
       .partner-list {
         display: inline-block;
@@ -369,7 +258,7 @@
     }
     .partner-item {
       margin-bottom: 38px;
-      font-size: 16px;
+      font-size: 14px;
       text-align: left;
     }
 
@@ -379,13 +268,6 @@
       }
     }
     @media (max-width: 768px) {
-      .wrap1200 {
-        padding: 0px;
-      }
-      .title-simple {
-        margin: 0 auto;
-        font-size: 18px;
-      }
       .expert-list__wrap {
         margin: 0 -6px;
       }

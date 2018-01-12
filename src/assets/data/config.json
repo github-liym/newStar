@@ -7,23 +7,33 @@
       },
       {
         "name": "关于NewStar",
-        "path": ""
+        "path": "/aboutUs"
       },
       {
-        "name": "新闻中心",
-        "path": ""
+        "name": "大赛资讯",
+        "path": "",
+        "children": [
+          {
+            "name": "大赛章程",
+            "path": "/charter"
+          },
+          {
+            "name": "大赛动态",
+            "path": "/news"
+          }
+        ]
       },
       {
-        "name": "专家库",
-        "path": ""
-      },
-      {
-        "name": "线上展览",
-        "path": ""
+        "name": "大师库",
+        "path": "/expert"
       },
       {
         "name": "参赛作品",
-        "path": ""
+        "path": "/opus"
+      },
+      {
+        "name": "报名参赛",
+        "path": "/user"
       }
     ],
     "sign": {
@@ -40,11 +50,11 @@
         },
         {
           "title": "联系我们",
-          "href": "/aboutUs"
+          "href": "/contactUs"
         },
         {
           "title": "法律声明",
-          "href": "/aboutUs"
+          "href": "/statement"
         }
       ],
       "copyright": "版权所有 91Ant.Copyright © 2013.All rights reserved.",
@@ -59,23 +69,33 @@
       },
       {
         "name": "关于NewStar",
-        "path": ""
+        "path": "/aboutUs"
       },
       {
-        "name": "新闻中心",
-        "path": ""
+        "name": "大赛资讯",
+        "path": "",
+        "children": [
+          {
+            "name": "大赛章程",
+            "path": "/charter"
+          },
+          {
+            "name": "大赛动态",
+            "path": "/news"
+          }
+        ]
       },
       {
-        "name": "专家库",
-        "path": ""
-      },
-      {
-        "name": "线上展览",
-        "path": ""
+        "name": "大师库",
+        "path": "/expert"
       },
       {
         "name": "参赛作品",
-        "path": ""
+        "path": "/opus"
+      },
+      {
+        "name": "报名参赛",
+        "path": "/user"
       }
     ],
     "sign": {

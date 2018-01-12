@@ -1,7 +1,7 @@
 <template>
   <swiper :options="swiperOption" class="swiper-main">
     <swiper-slide v-for="(item,index) in swiperData" :key="index">
-      <div class="slide-cover cover" :style="{backgroundImage: 'url('+item.url+')'}"></div>
+      <router-link :to="{path: item.href=='javascript:void(0);'? '/':item.href}" class="slide-cover cover" :style="{backgroundImage: 'url('+item.cover+')'}"></router-link>
     </swiper-slide>
     <div class="swiper-main__pagination swiper-pagination" slot="pagination"></div>
   </swiper>
@@ -15,10 +15,10 @@
     data() {
       return {
         swiperOption: {
-          autoplay: {
+          /*autoplay: {
             delay: 3000,//5秒切换一次
             disableOnInteraction: false,
-          },
+          },*/
           centeredSlides: true,
           pagination: {
             el: '.swiper-main__pagination',
@@ -33,6 +33,7 @@
 <style lang="scss">
   .swiper-main {
     .slide-cover {
+      display: block;
       &:before {
         padding-top: (525/1920)*100%;
         @media (max-width: 768px) {

@@ -1,31 +1,26 @@
 <template>
-  <router-link :to="{path: 'expertInfo', query:{id:expert.id}}" class="expert-item">
-    <div class="cover" :style="{ backgroundImage: 'url(http://newstar.91ant.com/'+expert.cover+')' }"></div>
+  <div class="expert-item">
+    <router-link :to="{path: 'expertInfo', query:{id:item.id}}" class="cover" :style="{ backgroundImage: 'url('+item.cover+')' }"></router-link>
     <div class="caption">
-      <div class="name omit">{{expert.name}}</div>
-      <div class="from omit">{{expert.from}}</div>
+      <div class="name omit">{{item.name}}</div>
+      <div class="from omit">{{item.from}}</div>
     </div>
     <div class="mask">
-      {{expert.desc}}
+      {{item.desc}}
       <div class="more">查看</div>
     </div>
-  </router-link>
+  </div>
 </template>
 
 
 <script>
   export default {
     name: 'carrousel',
-    props: ['expert'],
+    props: ['item'],
     data: function () {
       return {
       }
     },
-    filters: {
-      /*ellipsis: function () {
-
-      }*/
-    }
   }
 </script>
 
@@ -35,7 +30,6 @@
     position: relative;
     top: 0;
     transition: all ease .3s;
-    overflow: hidden;
     .cover {
       &:before {
         padding-top: (256/182)*100%;
@@ -80,7 +74,6 @@
     }
     &:hover {
       top: -8px;
-      overflow: inherit;
       .mask {
         opacity: 1;
         transform: scale(1);

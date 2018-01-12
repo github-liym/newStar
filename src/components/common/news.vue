@@ -1,14 +1,12 @@
 <template>
-  <div class="news-list__wrap">
-    <div class="news-list">
-      <div class="news-item" v-for="item in news">
-        <div class="cover" :style="{ backgroundImage: 'url('+item.cover+')' }"></div>
-        <div class="caption">
-          <div class="title omit">{{item.title}}</div>
-          <div class="time">{{item.time}}</div>
-          <div class="desc">{{item.desc}}</div>
-          <a class="i-triangle" href="">more</a>
-        </div>
+  <div class="news-list">
+    <div class="news-item" v-for="item in news">
+      <router-link :to="{path: 'newsInfo',query: {id:item.id}}" class="cover" :style="{ backgroundImage: 'url('+item.cover+')' }"></router-link>
+      <div class="caption">
+        <div class="title omit">{{item.title}}</div>
+        <div class="time">{{item.time}}</div>
+        <div class="desc">{{item.desc}}</div>
+        <a class="i-triangle" href="">more</a>
       </div>
     </div>
   </div>
@@ -23,7 +21,7 @@
       return {
 
       }
-    }
+    },
   }
 </script>
 
@@ -32,6 +30,7 @@
     position: relative;
     margin-bottom: 15px;
     .cover {
+      display: block;
       width: 370px;
       &:before {
         padding-top: (208/370)*100%;
@@ -59,7 +58,7 @@
     }
     .desc {
       font-size: 14px;
-      line-height: (16/14);
+      line-height: (18/14);
     }
     .i-triangle {
       position: absolute;

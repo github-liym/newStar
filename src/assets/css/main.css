@@ -1,0 +1,30 @@
+a {
+  display: inline-block;
+  color: inherit;
+  text-decoration: none;
+
+}
+a:hover {
+  color:inherit;
+}
+a:focus {
+  color:inherit;
+  outline: none;
+}
+
+.btn-yellow__linear {
+  width: 100%;
+  font-size: 16px;
+  padding: 10px 15px;
+  background: -webkit-gradient(linear, left bottom, left top, from(#fabf1b), to(#ffcf4b));
+  background: linear-gradient(to top, #fabf1b, #ffcf4b);
+  border: none;
+}
+.btn-code {
+  width: 100%;
+  border: 1px solid #fabf1b;
+  color: #fff;
+  background: #fabf1b;
+  padding: 7px 15px;
+  margin-top: 8px;
+}
