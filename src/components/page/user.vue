@@ -1,14 +1,159 @@
 <template>
   <div class="user-center__wrap">
+    <loading v-show="fetchLoading"></loading>
     <div class="page-bg__letter1 cover"></div>
     <div class="wrap1200">
       <div class="page-bg__letter cover"></div>
-      <Form class="user-form" ref="formValidate" :model="userForm.user">
+      <form id="userForm">
+        <div class="form-panel__1">
+          <h3 class="title-yellow">{{userInfo.title}}</h3>
+          <div class="text-767676">{{userInfo.NSId}}：{{userForm.id}}</div>
+          <div class="form-item">
+            <input v-model="userForm.name" name="username" v-validate="'required'" :data-vv-as="userInfo.name" :class="{ 'is-danger': errors.has('username')}" :placeholder="userInfo.name+'：'" type="text" class="form-controller__gray">
+            <span  class="form-text__danger">{{ errors.first('username') }}</span>
+          </div>
+          <div class="columns">
+            <div class="column is-9">
+              <div class="form-item radio-group__1 clearfix">
+                <div class="radio-item">
+                  <input class="radio-item__controller" id="man" type="radio" v-model="userForm.sex" value="1"/>
+                  <label class="radio-item__label" for="man">{{web.sex.man}}</label>
+                </div>
+                <div class="radio-item">
+                  <input  class="radio-item__controller" id="woman" type="radio" v-model="userForm.sex" value="0"/>
+                  <label class="radio-item__label" for="woman">{{web.sex.woman}}</label>
+                </div>
+              </div>
+            </div>
+            <div class="column is-15">
+              <div class="form-item">
+                <input v-model="userForm.birthday" name="birthday" type="text" v-validate="'required|date_format:YYYY/MM/DD'" :class="{ 'is-danger': errors.has('birthday')}" :data-vv-as="userInfo.birthday" :placeholder="userInfo.birthday+'：DD/MM/YYYY'" class="form-controller__gray" >
+                <span  class="form-text__danger">{{ errors.first('birthday') }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <input v-model="userForm.IDcard" name="IDcard" v-validate="'required'" :data-vv-as="userInfo.IDcard" :class="{ 'is-danger': errors.has('IDcard')}" :placeholder="userInfo.IDcard+'：'" type="text" class="form-controller__gray">
+            <span  class="form-text__danger">{{ errors.first('IDcard') }}</span>
+          </div>
+          <div class="form-item">
+            <input v-model="userForm.post" name="unit" v-validate="'required'" :data-vv-as="userInfo.unit" :class="{ 'is-danger': errors.has('unit')}" :placeholder="userInfo.unit+'：'" type="text" class="form-controller__gray">
+            <span  class="form-text__danger">{{ errors.first('unit') }}</span>
+          </div>
+          <div class="form-item">
+            <input v-model="userForm.graduationday" name="graduation" type="text" v-validate="'required|date_format:YYYY/MM/DD'" :class="{ 'is-danger': errors.has('graduation')}" :data-vv-as="userInfo.graduation" :placeholder="userInfo.graduation+'：DD/MM/YYYY'" class="form-controller__gray" >
+            <span  class="form-text__danger">{{ errors.first('graduation') }}</span>
+          </div>
+          <div class="form-item">
+            <input v-model="userForm.department" name="department" v-validate="'required'" :data-vv-as="userInfo.department" :class="{ 'is-danger': errors.has('department')}" :placeholder="userInfo.department+'：'" type="text" class="form-controller__gray">
+            <span  class="form-text__danger">{{ errors.first('department') }}</span>
+          </div>
+          <div class="columns">
+            <div class="column is-12">
+              <div class="form-item">
+                <input v-model="userForm.qq" placeholder="QQ：" type="text" class="form-controller__gray">
+              </div>
+            </div>
+            <div class="column is-12">
+              <div class="form-item">
+                <input v-model="userForm.wx" :placeholder="userInfo.wx+'：'" type="text" class="form-controller__gray">
+              </div>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column is-16">
+              <div class="form-item">
+                <input v-model="userForm.address" name="address" v-validate="'required'" :data-vv-as="userInfo.address" :class="{ 'is-danger': errors.has('address')}" :placeholder="userInfo.address+'：'" type="text" class="form-controller__gray">
+                <span  class="form-text__danger">{{ errors.first('address') }}</span>
+              </div>
+            </div>
+            <div class="column is-8">
+              <div class="form-item">
+                <input v-model="userForm.zipcode" name="zipcode" v-validate="'required'" :data-vv-as="userInfo.zipcode" :class="{ 'is-danger': errors.has('zipcode')}" :placeholder="userInfo.zipcode+'：'" type="text" class="form-controller__gray">
+                <span  class="form-text__danger">{{ errors.first('zipcode') }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column is-12">
+              <div class="form-item">
+                <div class="form-controller__gray">{{$store.state.user}}</div>
+              </div>
+            </div>
+            <div class="column is-12">
+              <div class="form-item">
+                <input v-model="userForm.email" :placeholder="userInfo.email+'：'" type="text" class="form-controller__gray">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-panel__1">
+          <h3 class="title-yellow">{{userInfo.opus}}</h3>
+          <div class="group-opus">
+            <span class="order">01.</span>
+            <div class="columns">
+              <div class="column is-10">
+                <div class="form-item">
+                  <input v-model="userForm.title1" name="opusTil" v-validate="'required'" :data-vv-as="userInfo.opusTil" :class="{ 'is-danger': errors.has('opusTil')}" :placeholder="userInfo.opusTil+'：'" type="text" class="form-controller__gray">
+                </div>
+              </div>
+              <div class="column is-7">
+                <div class="form-item">
+                  <input v-model="userForm.class1" name="opusType" v-validate="'required'" :data-vv-as="userInfo.opusType" :class="{ 'is-danger': errors.has('opusType')}" :placeholder="userInfo.opusType+'：'" type="text" class="form-controller__gray">
+                </div>
+              </div>
+              <div class="column is-7">
+                <div class="form-item">
+                  <input v-model="userForm.teacher1" name="opusTeacher" v-validate="'required'" :data-vv-as="userInfo.opusTeacher" :class="{ 'is-danger': errors.has('opusTeacher')}" :placeholder="userInfo.opusTeacher+'：'" type="text" class="form-controller__gray">
+                </div>
+              </div>
+            </div>
+            <div class="form-item">
+              <input v-model="userForm.desc1" name="opusDesc" v-validate="'required'" :data-vv-as="userInfo.opusDesc" :class="{ 'is-danger': errors.has('opusDesc')}" :placeholder="userInfo.opusDesc+'：'" type="text" class="form-controller__gray">
+              <span class="form-text__danger" v-if="errors.first('opusTil')||errors.first('opusDesc')||errors.first('opusTil')||errors.first('opusTeacher')">请填写完整的作品信息</span>
+            </div>
+          </div>
+          <div class="group-opus">
+            <span class="order">02.</span>
+            <div class="columns">
+              <div class="column is-10">
+                <div class="form-item">
+                  <input v-model="userForm.title2" :placeholder="userInfo.opusTil+'：'" type="text" class="form-controller__gray">
+                </div>
+              </div>
+              <div class="column is-7">
+                <div class="form-item">
+                  <input v-model="userForm.class2" :placeholder="userInfo.opusType+'：'" type="text" class="form-controller__gray">
+                </div>
+              </div>
+              <div class="column is-7">
+                <div class="form-item">
+                  <input v-model="userForm.teacher2" :placeholder="userInfo.opusTeacher+'：'" type="text" class="form-controller__gray">
+                </div>
+              </div>
+            </div>
+            <div class="form-item">
+              <input v-model="userForm.desc2" :placeholder="userInfo.opusDesc+'：'" type="text" class="form-controller__gray">
+            </div>
+          </div>
+          <div class="form-item">
+            <input v-model="userForm.remarks" :placeholder="userInfo.opusRemarks+'：'" type="text" class="form-controller__gray">
+          </div>
+        </div>
+        <div class="form-panel__1">
+          <div class="form-panel__ft">
+            <button class="btn-yellow__linear" type="button" @click="updateUser()">{{userInfo.updata}}</button>
+            <a class="down-link" :href="'http://newstar.91ant.com/api/index/toPDF?mid='+$store.state.user" target="_blank" >{{userInfo.down}}</a>
+          </div>
+        </div>
+      </form>
+      <!--<Form class="user-form" ref="formValidate" :model="userForm.user">
         <div class="user-panel">
-          <h3 class="title-yellow">个人信息</h3>
-          <div class="text-767676">NewStar 个人ID：{{userForm.user.id}}</div>
+          <h3 class="title-yellow">{{userInfo.title}}</h3>
+          <div class="text-767676">{{userInfo.NSId}}{{userForm.user.id}}</div>
           <FormItem>
-            <Input v-model="userForm.user.name" placeholder="姓名"></Input>
+            <Input v-model="userForm.user.name" :placeholder="userInfo.name"></Input>
           </FormItem>
           <Row :gutter="20">
             <Col span="9">
@@ -19,21 +164,21 @@
             </Col>
             <Col span="15">
               <FormItem>
-                <DatePicker :value="userForm.user.birthday" @on-change="userForm.user.birthday=$event" format="yyyy-MM-dd" class="group-date" type="date" placeholder="出生年月日："></DatePicker>
+                <DatePicker :value="userForm.user.birthday" @on-change="userForm.user.birthday=$event" format="yyyy-MM-dd" class="group-date" type="date" :placeholder="userInfo.birthday"></DatePicker>
               </FormItem>
             </Col>
           </Row>
           <FormItem>
-            <Input v-model="userForm.user.IDcard"  placeholder="身份证号码："></Input>
+            <Input v-model="userForm.user.IDcard"  :placeholder="userInfo.IDcard"></Input>
           </FormItem>
           <FormItem>
-            <Input v-model="userForm.user.post" placeholder="学校/单位名称："></Input>
+            <Input v-model="userForm.user.post" :placeholder="userInfo.unit"></Input>
           </FormItem>
           <FormItem>
-            <DatePicker :value="userForm.user.graduationday" @on-change="userForm.user.graduationday=$event" class="group-date" format="yyyy-MM-dd" type="date" placeholder="毕业年月日："></DatePicker>
+            <DatePicker :value="userForm.user.graduationday" @on-change="userForm.user.graduationday=$event" class="group-date" format="yyyy-MM-dd" type="date" :placeholder="userInfo.graduation"></DatePicker>
           </FormItem>
           <FormItem>
-            <Input v-model="userForm.user.department" placeholder="所在院/系:"></Input>
+            <Input v-model="userForm.user.department" :placeholder="userInfo.department"></Input>
           </FormItem>
 
           <Row :gutter="20">
@@ -44,19 +189,19 @@
             </Col>
             <Col span="12">
             <FormItem>
-              <Input v-model="userForm.user.wx" placeholder="微信:"></Input>
+              <Input v-model="userForm.user.wx" :placeholder="userInfo.wx"></Input>
             </FormItem>
             </Col>
           </Row>
           <Row :gutter="20">
             <Col span="17">
             <FormItem>
-              <Input v-model="userForm.user.address" placeholder="通讯地址："></Input>
+              <Input v-model="userForm.user.address" :placeholder="userInfo.address"></Input>
             </FormItem>
             </Col>
             <Col span="7">
             <FormItem>
-              <Input v-model="userForm.user.zipcode" placeholder="邮编："></Input>
+              <Input v-model="userForm.user.zipcode" :placeholder="userInfo.zipcode"></Input>
             </FormItem>
             </Col>
           </Row>
@@ -64,40 +209,40 @@
           <Row :gutter="20">
             <Col span="12">
             <FormItem>
-              <!--<Input v-model="userForm.tel" placeholder="手机号码:"></Input>-->
+              &lt;!&ndash;<Input v-model="userForm.tel" placeholder="手机号码:"></Input>&ndash;&gt;
               <div class="ivu-input">{{$store.state.user}}</div>
             </FormItem>
             </Col>
             <Col span="12">
             <FormItem>
-              <Input v-model="userForm.user.email" placeholder="邮箱:"></Input>
+              <Input v-model="userForm.user.email" :placeholder="userInfo.email"></Input>
             </FormItem>
             </Col>
           </Row>
         </div>
         <div class="user-panel">
-          <h3 class="title-yellow">参赛作品</h3>
+          <h3 class="title-yellow">{{userInfo.opus}}</h3>
           <div class="group-opus">
             <span class="order">01.</span>
             <Row :gutter="20">
               <Col span="12">
               <FormItem>
-                <Input v-model="userForm.user.title1" placeholder="作品题目:"></Input>
+                <Input v-model="userForm.user.title1" :placeholder="userInfo.opusTil"></Input>
               </FormItem>
               </Col>
               <Col span="6">
               <FormItem>
-                <Input v-model="userForm.user.class1" placeholder="作品类别:"></Input>
+                <Input v-model="userForm.user.class1" :placeholder="userInfo.opusType"></Input>
               </FormItem>
               </Col>
               <Col span="6">
               <FormItem>
-                <Input v-model="userForm.user.teacher1" placeholder="指导老师:"></Input>
+                <Input v-model="userForm.user.teacher1" :placeholder="userInfo.opusTeacher"></Input>
               </FormItem>
               </Col>
             </Row>
             <FormItem>
-              <Input v-model="userForm.user.desc1" placeholder="作品简要说明:"></Input>
+              <Input v-model="userForm.user.desc1" :placeholder="userInfo.opusDesc"></Input>
             </FormItem>
           </div>
           <div class="group-opus">
@@ -105,27 +250,27 @@
             <Row :gutter="20">
               <Col span="12">
               <FormItem>
-                <Input v-model="userForm.user.title2" placeholder="作品题目:"></Input>
+                <Input v-model="userForm.user.title2" :placeholder="userInfo.opusTil"></Input>
               </FormItem>
               </Col>
               <Col span="6">
               <FormItem>
-                <Input v-model="userForm.user.class2" placeholder="作品类别:"></Input>
+                <Input v-model="userForm.user.class2" :placeholder="userInfo.opusType"></Input>
               </FormItem>
               </Col>
               <Col span="6">
               <FormItem>
-                <Input v-model="userForm.user.teacher2" placeholder="指导老师:"></Input>
+                <Input v-model="userForm.user.teacher2" :placeholder="userInfo.opusTeacher"></Input>
               </FormItem>
               </Col>
             </Row>
             <FormItem>
-              <Input v-model="userForm.user.desc2" placeholder="作品简要说明:"></Input>
+              <Input v-model="userForm.user.desc2" :placeholder="userInfo.opusDesc"></Input>
             </FormItem>
           </div>
 
           <FormItem>
-            <Input v-model="userForm.user.remarks" placeholder="备注:"></Input>
+            <Input v-model="userForm.user.remarks" :placeholder="userInfo.opusRemarks"></Input>
           </FormItem>
 
         </div>
@@ -133,28 +278,23 @@
         <Row :gutter="1">
           <Col :span="20">
           <FormItem>
-            <Button class="btn-yellow__linear" type="primary" @click="updateUser()">更新信息</Button>
+            <Button class="btn-yellow__linear" type="primary" @click="updateUser()">{{userInfo.updata}}</Button>
           </FormItem>
           </Col>
           <Col :span="4">
-          <a class="down-link" :href="'http://newstar.91ant.com/api/index/toPDF?mid='+$store.state.user" target="_blank" >下载表格</a>
+          <a class="down-link" :href="'http://newstar.91ant.com/api/index/toPDF?mid='+$store.state.user" target="_blank" >{{userInfo.down}}</a>
           </Col>
         </Row>
-      </Form>
-      <div class="intro">
+      </Form>-->
+      <div class="form-panel__1 form-panel__intro">
         <hr/>
-        <h3>填表说明：</h3>
+        <h3>{{userInfo.description[0].title}}</h3>
         <ol>
-          <li>官网报名ID为本届大赛唯一官网（http://newstar.91ant.com）报名所注册的帐号；参赛者请写明院校和系别（单位），填写详细有效的通讯地址，初赛参赛者的表格无需盖章，填妥后发至；如参赛作品入选答辩阶段，则参赛者须用电脑打印该表格，经作者所在院系（单位）盖章后方生效，参赛者携此表与作品一起参加2018NewStar国际设计奖现场答辩。</li>
-          <li>如果是团队参赛，作者姓名填写主要设计者姓名，在备注处填写其他参与者姓名。</li>
-          <li>参赛作品不超过两份（含两份）。</li>
-          <li>进入答辩阶段的参赛者须在此表填写对作品的简要说明。</li>
+          <li v-for="item in userInfo.description[0].list">{{item}}</li>
         </ol>
-        <h3>作者声明：</h3>
+        <h3>{{userInfo.description[1].title}}</h3>
         <ol>
-          <li>本人同意2018NewStar国际设计奖所有参赛细则</li>
-          <li>本人确认主办方不以盈利为目的对本人作品的发表权。</li>
-          <li>本人确认以上所送作品为本人独立设计与制作，如果为合作作品，已经注明。如果引起著作权纠纷由本人全权负责。</li>
+          <li v-for="item in userInfo.description[1].list">{{item}}</li>
         </ol>
       </div>
     </div>
@@ -188,14 +328,14 @@
           "teacher2": "这是一个指导老师2",
           "desc2": "这是说明2"
         },*/
+        fetchLoading: true,
         modal1: false,
-        userForm: {
-        	user:{}
-        },
+        userForm: {},
         ruleValidate: ''
       }
     },
     mounted(){
+      console.log(this.$validator)
     	var self = this;
     	self.$http({
         method: 'post',
@@ -204,247 +344,54 @@
         	mid: self.$store.state.user
         },
       }).then(function (res) {
-        console.log(res)
-        self.userForm.user = res.data.user;
+//        console.log(res)
+        self.userForm = res.data.user;
+        self.fetchLoading = false;
       }).catch(function (err) {
         console.log(err)
       })
     },
+    computed: {
+    	userInfo(){
+    		return this.$store.state.config[this.$store.state.language].web.user
+      },
+    	web(){
+    		return this.$store.state.config[this.$store.state.language].web
+      }
+    },
     methods: {
-      handleSubmit (name) {
-        this.$refs[name].validate((valid) => {
-          if (valid) {
-            this.$Message.success('Success!');
-          } else {
-            this.$Message.error('Fail!');
-          }
-        })
-      },
-      handleReset (name) {
-        this.$refs[name].resetFields();
-      },
       updateUser(){
-      	var self = this;
-      	self.$http({
-          method: 'post',
-          url: '/api/index/update_user',
-          data: self.userForm.user,
+        var self = this;
+        self.$validator.validateAll().then((result) => {
+          if (result){
+            self.$http({
+              method: 'post',
+              url: '/api/index/update_user',
+              data: self.userForm,
 //          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 //          headers: {
 //            'X-Requested-With': 'XMLHttpRequest',
 //            'Content-Type': 'application/json; charset=UTF-8',
 //            'Access-Control-Allow-Origin': '*'
 //          },
-        }).then(function (res) {
-          alert("保存成功");
-         /* self.$Modal.confirm({
+            }).then(function (res) {
+              if (res.data == 1){
+                alert("保存成功");
+              }else {
+                alert("保存失败");
+              }
 
-          })*/
-//          console.log(self.userForm)
-        }).catch(function (err) {
-          console.log("错误")
-          console.log(err)
-          console.log(self.userForm)
+            }).catch(function (err) {
+              console.log("错误")
+              console.log(self.userForm)
+            })
+          }else {
+
+          }
         })
+
       },
-      /*getTime(starTime){
-      	console.log(starTime)
-      }*/
 
     }
   }
 </script>
-
-<style lang="scss">
-  .vertical-center-modal{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .ivu-modal-body {
-      padding: 30px 16px;
-    }
-    .ivu-modal-footer {
-
-    }
-    .ivu-modal{
-      top: 0;
-    }
-  }
-  .user-center__wrap {
-    position: relative;
-    color: #767676;
-    >.wrap1200 {
-      position: relative;
-      text-align: right;
-      padding-top: 120px;
-      padding-bottom: 50px;
-    }
-    .page-bg__letter {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: (352/1200)*100%;
-    }
-    .page-bg__letter1 {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      width: (476/1200)*100%;
-    }
-    .title-yellow {
-      position: absolute;
-      left: 0;
-      padding-top: 10px;
-      margin-top: -10px;
-      font-size: 18px;
-      color: #fabf1b;
-      padding-right: 45px;
-      line-height: 1;
-      background: url("../../assets/images/icon/i-triangle__gray1.png") no-repeat right bottom;
-    }
-    .ivu-input {
-      height: 46px;
-      background: #f7f7f7;
-      font-size: 14px;
-      line-height: 36px;
-    }
-    .group-opus {
-      position: relative;
-      .order {
-        position: absolute;
-        top: 0;
-        left: 0;
-        transform: translateX(-130%);
-        font-size: 16px;
-        line-height: 46px;
-        font-weight: bold;
-        color: #767676;
-      }
-    }
-    .user-panel {
-      padding-bottom: 15px;
-      &:first-child {
-        padding-bottom: 30px;
-      }
-    }
-    .intro {
-      position: relative;
-      display: inline-block;
-      max-width: 950px;
-      width: 100%;
-      padding: 0 100px 0 277px;
-      text-align: left;
-      font-weight: bold;
-      font-size: 12px;
-      hr {
-        margin-bottom: 20px;
-      }
-      h3 {
-        font-size: 14px;
-        margin-bottom: 5px;
-      }
-      ol li{list-style-type:decimal;}
-      ol {
-        padding-left: 20px;
-        line-height: (20/12);
-        margin-bottom: 25px;
-      }
-      /*ol li{ list-style-position:outside !important;}*/
-    }
-  }
-  .group-date {
-    width: 100%;
-    .ivu-input-icon {
-      height: 46px;
-      line-height: 46px;
-    }
-  }
-  .group-sex {
-    width: 100%;
-    border: 1px solid #edecec !important;
-    .ivu-radio-group-item{
-      position: relative;
-      width: 50%;
-      height: 46px;
-      line-height: 44px;
-      text-align: center;
-      box-shadow: none !important;
-      border: none !important;
-      color: #767676;
-      background: #f7f7f7;
-      &:nth-child(2) {
-        &:after {
-          content: '';
-          position: absolute;
-          top: 50%;
-          left: 0;
-          width: 1px;
-          height: 18px;
-          margin-top: -9px;
-          background: #767676;
-          z-index: 2;
-        }
-      }
-      &:hover {
-        color: #fabf1b;
-      }
-    }
-    .ivu-radio-wrapper-checked {
-      color: #fabf1b;
-    }
-  }
-  .text-767676 {
-    color: #767676;
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-  .user-form {
-    position: relative;
-    display: inline-block;
-    max-width: 950px;
-    width: 100%;
-    padding: 0 100px 0 277px;
-    text-align: left;
-  }
-  .ivu-form{
-    .ivu-form-item-label {
-      padding-right: 3px;
-    }
-  }
-  .down-link {
-    display: block;
-    color: #0072a6;
-    text-decoration: underline;
-    font-weight: bold;
-    text-align: center;
-    line-height: 44px;
-    &:hover {
-      color: #0072a6;
-      text-decoration: underline;
-    }
-  }
-  @media (max-width: 1200px) {
-    .user-form,.user-center__wrap .intro {
-      padding: 0 100px 0 250px;
-    }
-  }
-  @media (max-width: 992px) {
-    .user-form,.user-center__wrap .intro {
-      padding: 0 50px 0 120px;
-    }
-  }
-  @media (max-width: 768px) {
-    .user-center__wrap > .wrap1200 {
-      padding-top: 40px;
-    }
-    .user-center__wrap .title-yellow {
-      display: inline-block;
-      position: relative;
-      margin-bottom: 20px;
-    }
-    .user-form,.user-center__wrap .intro {
-      padding: 0 30px;
-    }
-
-  }
-</style>

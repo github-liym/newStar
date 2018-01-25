@@ -1,5 +1,6 @@
 <template>
-  <div class="about-us__wrap wrap1200">
+  <div class="article__wrap wrap1200">
+    <loading v-show="fetchLoading"></loading>
     <div class="page-bg__triangle cover"></div>
     <div class="page-bg__letter cover"></div>
     <div class="article" v-html="statement[$store.state.language]"></div>
@@ -12,6 +13,7 @@
     name: 'aboutUs',
     data () {
       return {
+        fetchLoading: true,
         statement: {}
       }
     },
@@ -21,8 +23,9 @@
         method: 'post',
         url: '/api/documents/statement'
       }).then(function (res) {
-//      	console.log(res.data)
+//      	console.log(res.data);
       	self.statement = res.data;
+        self.fetchLoading = false;
       }).catch(function (err) {
         console.log(err);
       })
@@ -32,30 +35,3 @@
     }
   }
 </script>
-
-<style lang="scss" scoped>
-  .about-us__wrap {
-    position: relative;
-    padding-top: 70px;
-    padding-bottom: 120px;
-    .page-bg__letter {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: (352/1200)*100%;
-    }
-    .page-bg__triangle {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      width: (575/1200)*100%;
-    }
-    .article {
-      position: relative;
-      z-index: 2;
-      max-width: 760px;
-      margin: 0 auto;
-      line-height: (22/14);
-    }
-  }
-</style>

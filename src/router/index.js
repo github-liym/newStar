@@ -13,6 +13,8 @@ import expertInfo from '@/components/page/expertInfo'
 import opus from '@/components/page/opus'
 import Login from '@/components/page/Login'
 import User from '@/components/page/user'
+import Information from '@/components/page/Information'
+import mediaFocus from '@/components/page/mediaFocus'
 
 Vue.use(Router)
 
@@ -26,18 +28,31 @@ export default new Router({
     },
     {
       path: '/index',
-      name: 'Index',
+      name: 'index',
       component: Index
     },
     {
-      path: '/news',
-      name: 'news',
-      component: News
-    },
-    {
-      path: '/charter',
-      name: 'charter',
-      component: charter
+      path: '/Information',
+      name: 'Information',
+      component: Information,
+      children: [
+        {
+          path: '',
+          component: News
+        },
+        {
+          path: 'news',
+          component: News
+        },
+        {
+          path: 'charter',
+          component: charter
+        },
+        {
+          path: 'mediaFocus',
+          component: mediaFocus
+        },
+      ]
     },
     {
       path: '/newsInfo',
@@ -50,7 +65,10 @@ export default new Router({
     {
       path: '/expert',
       name: 'expert',
-      component: Expert
+      component: Expert,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/expertInfo',
@@ -89,7 +107,7 @@ export default new Router({
       path: '/user',
       name: 'User',
       meta: {
-        requireAuth: true
+        keepAlive: true
       },
       component: User
     },

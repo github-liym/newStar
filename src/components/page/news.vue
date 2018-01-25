@@ -1,10 +1,13 @@
 <template>
   <div class="news-list__wrap wrap1200">
-    <h2 class="title-simple">大赛动态 | Competition dynamics</h2>
+    <loading v-show="fetchLoading"></loading>
+    <h2 class="title-simple">{{web.title.news}}</h2>
     <news v-if="newlist[$store.state.language]" class="news-list" :news="newlist[$store.state.language]"></news>
 
-    <div  v-show="newlist[$store.state.language]" class="news-more" @click="getData()" v-if="count>pageSize && count>pageSize*p">加载更多</div>
-    <div  v-show="newlist[$store.state.language]" class="news-more" v-if="!(count>pageSize*p)">没有更多数据了</div>
+    <h2 v-if="!newlist[$store.state.language]" style="text-align: center; padding-top: 12%;">{{web.news.empty}}</h2>
+
+    <div  v-show="newlist[$store.state.language]" class="news-more" @click="getData()" v-if="count>pageSize && count>pageSize*p">{{web.others.loadMore}}</div>
+    <div  v-show="newlist[$store.state.language]" class="news-more" v-if="!(count>pageSize*p)&&p>1">{{web.others.notMore}}</div>
   </div>
 </template>
 
@@ -14,6 +17,7 @@
     name: 'newsPage',
     data () {
       return {
+        fetchLoading: true,
       	newlist: {
 
         },
@@ -79,6 +83,7 @@
 //      	console.log(res.data)
         self.newlist = res.data;
       	self.count = res.data.count;
+        self.fetchLoading = false;
       }).catch(function (err) {
         console.log(err);
       })
@@ -107,29 +112,13 @@
         })
       }
     },
+    computed: {
+      web(){
+        return this.$store.state.config[this.$store.state.language].web
+      }
+    },
     components: {
       news
     }
   }
 </script>
-
-<style scoped>
-  .news-list__wrap {
-    padding-bottom: 45px;
-    min-height: 590px;
-  }
-  .news-list {
-    padding-bottom: 10px;
-  }
-  .news-more {
-    display: block;
-    cursor: pointer;
-    background: #f1f1f1;
-    text-align: center;
-    color: #767676;
-    line-height: 46px;
-  }
-  .data-none {
-
-  }
-</style>

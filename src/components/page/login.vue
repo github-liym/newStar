@@ -1,22 +1,49 @@
 <template>
   <div class="login-wrap">
+    <loading v-show="fetchLoading"></loading>
     <div class="wrap1200 clearfix">
       <div class="login-logo__wrap">
         <div class="login-logo cover"></div>
       </div>
       <div class="login-panel" v-if="!$store.state.user">
-        <h3 class="login-title">登录 | Login</h3>
-        <div class="login-title__sub">免注册，使用手机动态验证码登录。</div>
-        <Form ref="formCustom" :model="formCustom" :rules="ruleCustom">
+        <h3 class="login-title">{{web.login.title}}</h3>
+        <div class="login-title__sub">{{web.login.titleSub}}</div>
+        <form>
+          <div class="form-item">
+            <input v-model="formCustom.tel" name="mobile" v-validate="'required|mobile'" :data-vv-as="web.form.phoneTip" :class="{ 'is-danger': errors.has('mobile')}" :placeholder="web.form.phoneTip+'：'" type="text" class="form-controller__gray">
+            <span  class="form-text__danger">{{ errors.first('mobile') }}</span>
+          </div>
+          <div class="columns">
+            <div class="column is-16">
+              <div class="form-item">
+                <input v-model="formCustom.code" name="code" v-validate="'required|mobile'" :data-vv-as="web.form.code" :class="{ 'is-danger': errors.has('code')}" :placeholder="web.form.codeTip+'：'" type="text" class="form-controller__gray">
+                <span  class="form-text__danger">{{ errors.first('code') }}</span>
+              </div>
+            </div>
+            <div class="column is-8">
+              <div class="form-item">
+                <button type="button" class="btn-code" @click="getCode()" :disabled="isSend">
+                  <span v-show="!isSend">{{web.form.sendCode}}</span>
+                  <span v-show="isSend">{{coutDown}}s</span>
+                </button>
+              </div>
+
+            </div>
+          </div>
+          <div class="form-item">
+            <button class="btn-yellow__linear"  type="button" @click="handleSubmit('formCustom')">{{web.others.signIn}}</button>
+          </div>
+        </form>
+       <!-- <Form ref="formCustom" :model="formCustom" :rules="ruleCustom">
           <FormItem prop="tel">
-            <Input type="text" class="ivu-controller" v-model="formCustom.tel" placeholder="输入手机号码"></Input>
+            <Input type="text" class="ivu-controller" v-model="formCustom.tel" :placeholder="web.form.phoneTip"></Input>
           </FormItem>
           <FormItem prop="code" :class="{'ivu-form-item-error': codeErr }">
             <Row :gutter="6">
-              <Col span="16" ><Input type="text" class="ivu-controller"  v-model="formCustom.code" placeholder="输入验证码"></Input></Col>
+              <Col span="16" ><Input type="text" class="ivu-controller"  v-model="formCustom.code" :placeholder="web.form.codeTip"></Input></Col>
               <Col span="8">
               <Button type="primary" class="btn-code" @click="getCode()" :disabled="isSend">
-                <span v-show="!isSend">发送验证码</span>
+                <span v-show="!isSend">{{web.form.sendCode}}</span>
                 <span v-show="isSend">{{coutDown}}s</span>
               </Button>
               </Col>
@@ -24,9 +51,9 @@
             <div v-if="codeErr" class="ivu-form-item-error-tip">验证码错误</div>
           </FormItem>
           <FormItem>
-            <Button class="btn-yellow__linear"  type="primary" @click="handleSubmit('formCustom')">登录</Button>
+            <Button class="btn-yellow__linear"  type="primary" @click="handleSubmit('formCustom')">{{web.others.signIn}}</Button>
           </FormItem>
-        </Form>
+        </Form>-->
 
       </div>
       <div v-else><h3 class="login-title">{{$store.state.user}},欢迎您</h3></div>
@@ -36,7 +63,7 @@
 <script>
   export default {
     data () {
-      const validateTel = (rule, value, callback) => {
+      /*const validateTel = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('手机号码不能为空'));
         }else if(!/^1[34578]\d{9}$/.test(value)) {
@@ -51,9 +78,10 @@
         }else {
           callback();
         }
-      };
+      };*/
 
       return {
+        fetchLoading: true,
       	coutDown: '',
         timer: null,
         isSend: false,
@@ -62,38 +90,39 @@
           tel: '',
           code: ''
         },
-        ruleCustom: {
+        /*ruleCustom: {
           tel: [
             { validator: validateTel, trigger: 'blur' }
           ],
           code: [
             { validator: validateCode, trigger: 'blur' },
           ]
-        }
+        }*/
       }
+    },
+    mounted(){
+      this.fetchLoading = false;
     },
     methods: {
       getCode () {
         var self = this;
-        this.$refs.formCustom.validateField('tel',function (err) {
-          if(!err){
+        self.$validator.validate('mobile',self.formCustom.tel).then(result => {
+          if (result){
             self.isSend = true;
             const TIME_COUNT = 60;
             if (!self.timer) {
-            	self.$http({
+             /* self.$http({
                 method: 'post',
                 url: 'api/Index/sendMsg',
                 data: {
-                	m: self.formCustom.tel
+                  m: self.formCustom.tel
                 }
-              })
-                .then(function (res) {
-//                  console.log(res)
-                })
-                .catch(function (err) {
-                  /*console.log("Err")
-                  console.log(err)*/
-                });
+              }).then(function (res) {
+                  console.log(res)
+                }).catch(function (err) {
+                  /!*console.log("Err")
+                   console.log(err)*!/
+                });*/
               self.coutDown = TIME_COUNT;
               self.timer = setInterval(() => {
                 if (self.coutDown > 1 && self.coutDown <= TIME_COUNT) {
@@ -141,92 +170,12 @@
           }
         })
       }
+    },
+    computed: {
+    	web(){
+    		return this.$store.state.config[this.$store.state.language].web
+      }
     }
   }
 </script>
 
-<style lang="scss">
-  .login-wrap {
-    height: 100%;
-    background: url("../../assets/images/login-bg.jpg") no-repeat center;
-    background-size: cover;
-    overflow: hidden;
-    >.wrap1200 {
-      position: relative;
-      margin-top: 5%;
-    }
-  }
-  .login-logo__wrap {
-    float: left;
-    width: 60%;
-  }
-  .login-panel {
-    float: left;
-    width: 320px;
-    padding-top: 30px;
-  }
-  .login-logo {
-    width: 340px;
-    margin: 0 auto;
-    background-image: url("../../assets/images/login-gif.gif");
-  }
-  .login-title {
-    margin: 0 auto 5px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #333333;
-    text-align: center;
-  }
-  .login-title__sub {
-    margin-bottom: 15px;
-    font-size: 12px;
-    text-align: center;
-    color: #666666;
-  }
-  .btn-code {
-    width: 100%;
-    border: 1px solid #fabf1b;
-    color: #fff;
-    background: #fabf1b;
-    padding: 7px 15px;
-    margin-top: 8px;
-    &:hover {
-      border: 1px solid #fabf1b;
-      background: rgba(#fabf1b,.8);
-    }
-  }
-  .ivu-controller {
-    .ivu-input {
-      background: #f5f5f5;
-      height: 50px;
-      &:hover {
-        border-color: #fabf1b;
-      }
-      &:focus {
-        box-shadow: none;
-        border-color: #fabf1b;
-      }
-    }
-  }
-
-  @media (max-width: 992px) {
-    .login-logo__wrap {
-      width: 430px;
-      .login-logo {
-        margin: 0;
-      }
-    }
-    .login-wrap>.wrap1200 {
-      padding: 0;
-    }
-  }
-  @media (max-width: 768px) {
-    .login-logo__wrap {
-      display: none;
-    }
-    .login-panel {
-      float: none;
-      margin: 0 auto;
-    }
-  }
-</style>

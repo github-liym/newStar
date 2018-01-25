@@ -15,10 +15,10 @@
     data() {
       return {
         swiperOption: {
-          /*autoplay: {
+          autoplay: {
             delay: 3000,//5秒切换一次
             disableOnInteraction: false,
-          },*/
+          },
           centeredSlides: true,
           pagination: {
             el: '.swiper-main__pagination',
@@ -29,42 +29,3 @@
     }
   }
 </script>
-
-<style lang="scss">
-  .swiper-main {
-    .slide-cover {
-      display: block;
-      &:before {
-        padding-top: (525/1920)*100%;
-        @media (max-width: 768px) {
-          padding-top: (525/1200)*100%;
-        }
-      }
-    }
-    .swiper-main__pagination {
-      .swiper-pagination-bullet {
-        background: #fff;
-        width: 10px;
-        height: 10px;
-
-      }
-      .swiper-pagination-bullet-active {
-        background: #fff;
-      }
-    }
-    @media (max-width: 768px) {
-
-      .swiper-main__pagination {
-        .swiper-pagination-bullet {
-          width: 8px;
-          height: 8px;
-
-        }
-      }
-    }
-  }
-
-
-
-
-</style>

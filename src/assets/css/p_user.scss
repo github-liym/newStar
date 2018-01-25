@@ -1,0 +1,218 @@
+.user-center__wrap {
+  position: relative;
+  color: #767676;
+  >.wrap1200 {
+    position: relative;
+    text-align: right;
+    padding-top: 120px;
+    padding-bottom: 50px;
+  }
+  .page-bg__letter {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: (352/1200)*100%;
+  }
+  .page-bg__letter1 {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: (476/1200)*100%;
+  }
+  .title-yellow {
+    position: absolute;
+    left: 0;
+    padding-top: 10px;
+    margin-top: -10px;
+    font-size: 18px;
+    color: #fabf1b;
+    padding-right: 45px;
+    line-height: 1;
+    background: url("../../assets/images/icon/i-triangle__gray1.png") no-repeat right bottom;
+  }
+  .ivu-input {
+    height: 46px;
+    background: #f7f7f7;
+    font-size: 14px;
+    line-height: 36px;
+  }
+  .group-opus {
+    position: relative;
+    .order {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateX(-130%);
+      font-size: 16px;
+      line-height: 46px;
+      font-weight: bold;
+      color: #767676;
+    }
+  }
+  .user-panel {
+    padding-bottom: 15px;
+    &:first-child {
+      padding-bottom: 30px;
+    }
+  }
+  .form-panel__intro {
+    position: relative;
+    display: inline-block;
+    text-align: left;
+    font-weight: bold;
+    font-size: 12px;
+    hr {
+      margin-bottom: 20px;
+    }
+    h3 {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+    ol li{list-style-type:decimal;}
+    ol {
+      padding-left: 20px;
+      line-height: (20/12);
+      margin-bottom: 25px;
+    }
+    /*ol li{ list-style-position:outside !important;}*/
+  }
+}
+.group-date {
+  width: 100%;
+  .ivu-input-icon {
+    height: 46px;
+    line-height: 46px;
+  }
+}
+.group-sex {
+  width: 100%;
+  border: 1px solid #edecec !important;
+  .ivu-radio-group-item{
+    float: left;
+    position: relative;
+    width: 50%;
+    height: 46px;
+    line-height: 44px;
+    text-align: center;
+    box-shadow: none !important;
+    border: none !important;
+    color: #767676;
+    background: #f7f7f7;
+    &:nth-child(2) {
+      &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 1px;
+        height: 18px;
+        margin-top: -9px;
+        background: #767676;
+        z-index: 2;
+      }
+    }
+    &:hover {
+      color: #fabf1b;
+    }
+  }
+  .ivu-radio-wrapper-checked {
+    color: #fabf1b;
+  }
+}
+.text-767676 {
+  color: #767676;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+.user-form {
+  position: relative;
+  display: inline-block;
+  max-width: 950px;
+  width: 100%;
+  padding: 0 100px 0 277px;
+  text-align: left;
+}
+.down-link {
+  display: block;
+  color: #0072a6;
+  text-decoration: underline;
+  font-weight: bold;
+  text-align: center;
+  line-height: 44px;
+  &:hover {
+    color: #0072a6;
+    text-decoration: underline;
+  }
+}
+@media (max-width: 1200px) {
+  .user-form,.user-center__wrap .intro {
+    padding: 0 100px 0 250px;
+  }
+}
+@media (max-width: 992px) {
+  .user-form,.user-center__wrap .intro {
+    padding: 0 50px 0 120px;
+  }
+}
+@media (max-width: 768px) {
+  .user-center__wrap > .wrap1200 {
+    padding-top: 40px;
+  }
+  .user-center__wrap .title-yellow {
+    display: inline-block;
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .user-form,.user-center__wrap .intro {
+    padding: 0 30px;
+  }
+}
+
+
+
+#userForm {
+  text-align: right;
+  .form-panel__1 {
+    display: inline-block;
+    text-align: left;
+  }
+  .form-text__danger {
+
+  }
+  .columns {
+    margin: 0 -10px;
+  }
+  .column {
+    padding: 0 10px;
+  }
+  .group-opus {
+    padding-bottom: 15px;
+    .form-item {
+      margin-bottom: 10px;
+    }
+  }
+  .form-panel__1 {
+    .title-yellow {
+      margin-top: 0;
+    }
+    &:first-child {
+      .title-yellow {
+        margin-top: -10px;
+      }
+    }
+  }
+  .form-panel__ft {
+    position: relative;
+    margin-bottom: 35px;
+    padding-right: 80px;
+  }
+  .down-link {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -10px;
+    display: inline-block;
+    padding: 0 6px;
+    line-height: 1.5;
+  }
+}

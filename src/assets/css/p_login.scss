@@ -1,0 +1,96 @@
+.login-wrap {
+  height: 100%;
+  background: url("../../assets/images/login-bg.jpg") no-repeat center;
+  background-size: cover;
+  overflow: hidden;
+  >.wrap1200 {
+    position: relative;
+    margin-top: 5%;
+  }
+  .columns {
+    margin: 0 -4px;
+  }
+  .column {
+    padding: 0 4px;
+  }
+}
+.login-logo__wrap {
+  float: left;
+  width: 60%;
+}
+.login-panel {
+  float: left;
+  width: 320px;
+  padding-top: 30px;
+}
+.login-logo {
+  width: 340px;
+  margin: 0 auto;
+  background-image: url("../../assets/images/login-gif.gif");
+}
+.login-title {
+  margin: 0 auto 5px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333333;
+  text-align: center;
+}
+.login-title__sub {
+  margin-bottom: 15px;
+  font-size: 12px;
+  text-align: center;
+  color: #666666;
+}
+.btn-code {
+  width: 100%;
+  border: 1px solid #fabf1b;
+  color: #fff;
+  background: #fabf1b;
+  padding: 7px 0px;
+  margin-top: 6px;
+  border-radius: 5px;
+  font-size: 12px;
+  &:hover {
+    border: 1px solid #fabf1b;
+    background: rgba(#fabf1b,.8);
+  }
+  &[disabled] {
+    background: #d9d9d9 !important;
+    border: 1px solid #d0d0d0 !important;
+    cursor: not-allowed !important;
+  }
+}
+.ivu-controller {
+  .ivu-input {
+    background: #f5f5f5;
+    height: 50px;
+    &:hover {
+      border-color: #fabf1b;
+    }
+    &:focus {
+      box-shadow: none;
+      border-color: #fabf1b;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .login-logo__wrap {
+    width: 430px;
+    .login-logo {
+      margin: 0;
+    }
+  }
+  .login-wrap>.wrap1200 {
+    padding: 0;
+  }
+}
+@media (max-width: 768px) {
+  .login-logo__wrap {
+    display: none;
+  }
+  .login-panel {
+    float: none;
+    margin: 0 auto;
+  }
+}

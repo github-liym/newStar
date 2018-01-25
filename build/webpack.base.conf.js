@@ -47,10 +47,10 @@ module.exports = {
         loader: 'vue-loader',
         options: vueLoaderConfig
       },
-      {
+      /*{
         test: /\.scss$/,
         loaders: ["style","css","scss"]
-      },
+      },*/
       {
         test: /\.js$/,
         loader: 'babel-loader',

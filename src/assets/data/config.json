@@ -3,7 +3,7 @@
     "nav": [
       {
         "name": "首页",
-        "path": "/"
+        "path": "/index"
       },
       {
         "name": "关于NewStar",
@@ -11,7 +11,7 @@
       },
       {
         "name": "大赛资讯",
-        "path": "",
+        "path": "/Information",
         "children": [
           {
             "name": "大赛章程",
@@ -40,7 +40,18 @@
       "signIn": {
         "name": "登录",
         "path": "/login"
+      },
+      "signOut": {
+        "name": "退出",
+        "path": "/login"
       }
+    },
+    "title": {
+      "master": "大师库 | Master library",
+      "dynamics": "大赛动态 | Competition dynamics"
+    },
+    "others": {
+      "more": "更多"
     },
     "footer": {
       "nav":[
@@ -64,37 +75,37 @@
   "en": {
     "nav": [
       {
-        "name": "首页",
-        "path": "/"
+        "name": "Home",
+        "path": "/index"
       },
       {
-        "name": "关于NewStar",
+        "name": "About",
         "path": "/aboutUs"
       },
       {
-        "name": "大赛资讯",
-        "path": "",
+        "name": "Information",
+        "path": "/Information",
         "children": [
           {
-            "name": "大赛章程",
+            "name": "Competition rules",
             "path": "/charter"
           },
           {
-            "name": "大赛动态",
+            "name": "Competition dynamics",
             "path": "/news"
           }
         ]
       },
       {
-        "name": "大师库",
+        "name": "Master library",
         "path": "/expert"
       },
       {
-        "name": "参赛作品",
+        "name": "Works",
         "path": "/opus"
       },
       {
-        "name": "报名参赛",
+        "name": "Entered the competition",
         "path": "/user"
       }
     ],
@@ -102,21 +113,32 @@
       "signIn": {
         "name": "sign in",
         "path": "/login"
+      },
+      "signOut": {
+        "name": "sign out",
+        "path": "/login"
       }
+    },
+    "title": {
+      "master": "Master library",
+      "dynamics": "Competition dynamics"
+    },
+    "others": {
+      "more": "more"
     },
     "footer": {
       "nav":[
         {
-          "title": "关于NewStar",
+          "title": "About",
           "href": "/aboutUs"
         },
         {
-          "title": "联系我们",
-          "href": "/aboutUs"
+          "title": "Contact Us",
+          "href": "/contactUs"
         },
         {
-          "title": "法律声明",
-          "href": "/aboutUs"
+          "title": "Legal Notices",
+          "href": "/statement"
         }
       ],
       "copyright": "Copyright © 2017 Design Intellgence Award. All rights reserved",

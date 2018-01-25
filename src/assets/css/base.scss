@@ -1,3 +1,7 @@
+@font-face {
+  font-family: 'AkzidenzGroteskBE-BoldCn';
+  //src: url(../fonts/AkzidenzGroteskBE-BoldCn.otf);
+}
 * {
   box-sizing: border-box;
 }
@@ -11,7 +15,8 @@ body {
   color: #444444;
   overflow-y: scroll;
   overflow-x: hidden;
-  font-family: "Microsoft YaHei",Helvetica , Arial, Microsoft YaHei, Tahoma, Verdana, Georgia;
+  letter-spacing: .5px;
+  font-family: "AkzidenzGroteskBE-BoldCn","Microsoft YaHei",Helvetica , Arial, Microsoft YaHei, Tahoma, Verdana, Georgia;
 }
 textarea {
   resize: none;
@@ -30,7 +35,6 @@ ul,ol{
   }
 }
 a {
-  display: inline-block;
   color: inherit;
   text-decoration: none;
   &:hover {
@@ -55,16 +59,20 @@ a {
     width: 95%;
   }
 }
-.clearfix:after{
-  content:"";
-  height:0;
-  line-height:0;
-  display:block;
-  visibility:hidden;
-  clear:both;
-}
 .clearfix{
   zoom:1;
+  &:after {
+    content:"";
+    height:0;
+    line-height:0;
+    display:block;
+    visibility:hidden;
+    clear:both;
+  }
+}
+.omit {
+  max-width: 100%;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
 .fl {
   float: left;
@@ -74,11 +82,8 @@ a {
 }
 .fullScreen {
   height: 100%;
-  padding-top: 69px;
-  @media (max-width: 992px) {
-    padding-top: 102px;
-  }
-  padding-bottom: 101px;
+  padding-top: 300px;
+  padding-bottom: 62px;
   #header {
     position: fixed;
     top: 0;
@@ -91,9 +96,13 @@ a {
     left: 0;
     width: 100%;
   }
+  @media (max-width: 768px) {
+    padding-bottom: 80px;
+  }
+
 }
 .cover {
-  background: center;
+  background: no-repeat center;
   background-size: cover;
   &:before {
     content: '';
@@ -103,6 +112,7 @@ a {
 }
 i.icon {
   display: block;
+  background-size: 100% 100%;
   &:before {
     content: '';
     display: block;
@@ -112,6 +122,51 @@ i.icon {
   }
   &.i-search {
     width: 10px;
-    background-image: url("assets/images/icon/i-search.png");
+    background-image: url("../images/icon/i-search.png");
+  }
+  &.i-prev {
+    width: 50px;
+    height: auto;
+    background-image: url("../images/icon/i-prev.png");
+    &:before {
+      padding-top: (36/50)*100%;
+    }
+  }
+  &.i-next {
+    width: 50px;
+    height: auto;
+    background-image: url("../images/icon/i-next.png");
+    &:before {
+      padding-top: (36/50)*100%;
+    }
+  }
+  &.i-play {
+    width: 80px;
+    background-image: url("../images/icon/i-play.png");
+  }
+  &.i-close {
+    width: 128px;
+    background-image: url("../images/icon/i-close.png");
+  }
+}
+
+
+.article {
+  p {
+    margin-bottom: 15px;
+  }
+  img {
+    max-width: 100%;
+  }
+}
+.wrap1200 {
+  padding: 0 30px;
+
+}
+
+
+@media (max-width: 768px) {
+  .wrap1200 {
+    padding: 0px;
   }
 }
