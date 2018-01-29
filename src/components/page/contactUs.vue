@@ -8,7 +8,8 @@
       <ul class="contact-inner">
         <li>{{web.form.contact}}：{{contact.tel}}</li>
         <li>{{web.form.email}}：{{contact.email}}</li>
-        <li>{{web.form.address}}：{{contact.address}}</li>
+        <li v-if="$store.state.language=='zh'">{{web.form.address}}：{{contact.address}}</li>
+        <li v-else>{{web.form.address}}：{{contact.en_address}}</li>
         <li>
           <div class="wxcode">
             <img :src="contact.wx_url">
@@ -32,13 +33,9 @@
       var self = this;
       self.$http({
         method: 'post',
-        url: '/api/documents/contact',
-        data: {
-          lang: self.$store.state.language,
-          p: 1
-        }
+        url: '/api/documents/contact'
       }).then(function (res) {
-      	console.log(res.data[0])
+//      	console.log(res.data[0])
         self.contact = res.data[0];
         self.fetchLoading = false;
       }).catch(function (err) {

@@ -173,6 +173,9 @@ const state={
         login: {
           title: "登录 | Login",
           titleSub: "免注册，使用手机动态验证码登录。",
+        },
+        index: {
+          master: "NewStar国际设计奖汲取了IOD创意大师的经验与人脉网。IOD创意大师由600多位世界顶级创意大师组成。"
         }
       },
       "footer": {
@@ -356,6 +359,9 @@ const state={
         login: {
           title: "Login",
           titleSub: "Free registration, use mobile phone verification code login.",
+        },
+        index: {
+          master: "NewStar Design Awards draws on the experience and networks of the Ideas on Design Creative Masters. Over 600 of the world’s most innovative creative practitioners are part of the IOD Creative Masters Library."
         }
       },
       "footer": {

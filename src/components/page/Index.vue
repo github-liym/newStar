@@ -18,6 +18,7 @@
     </div>
     <div class="expert-library__wrap wrap1200"  v-show="expert">
       <h2 class="title-simple">{{web.title.master}}</h2>
+      <div class="expert-library__text">{{web.index.master}}</div>
       <div class="expert-list__wrap clearfix">
         <div class="expert-item__wrap" v-for="item in expert">
           <expert :expert="item"></expert>
