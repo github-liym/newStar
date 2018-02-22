@@ -4,7 +4,7 @@
     <keep-alive>
       <router-view class="relative" v-if="!$route.meta.keepAlive"  :style="{minHeight: minHeight}"></router-view>
     </keep-alive>
-    <router-view class="relative" v-if="$route.meta.keepAlive" :config="configData" :style="{minHeight: minHeight}"></router-view>
+    <router-view class="relative" v-if="$route.meta.keepAlive" :style="{minHeight: minHeight}"></router-view>
     <footerMain ref="footer"></footerMain>
   </div>
 </template>
