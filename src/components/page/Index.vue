@@ -11,7 +11,7 @@
       <div class="wrap1200">
         <h2 class="title-simple">
           {{web.title.news}}
-          <router-link class="news-more" :to="{path: '/news'}">{{web.others.more}}</router-link>
+          <router-link class="news-more" :to="{path: '/Information/news'}">{{web.others.more}}</router-link>
         </h2>
         <news class="news-list__wrap" :news="news"></news>
       </div>

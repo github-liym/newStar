@@ -2,8 +2,8 @@
 	<header id="header" class="navbar" :class="{'navbar__active': isActive}">
     <div ref="headerTop" class="navbar-top">
       <div class="wrap1200">
-        <router-link :to="{path: '/index'}"><img class="logo-head" src="../../assets/images/logo-head.png"/></router-link>
-        <router-link :to="{path: '/index'}"><img class="logo-head__simple" src="../../assets/images/logo.png"/></router-link>
+        <router-link :to="{path: '/index'}"><img class="logo-head" src="../../assets/images/logo-head.png" alt="2018NewStar国际设计奖LOGO"/></router-link>
+        <router-link :to="{path: '/index'}"><img class="logo-head__simple" src="../../assets/images/logo.png"  alt="2018NewStar国际设计奖LOGO"/></router-link>
         <div class="navbar-top__right">
           <ul class="language-trigger">
             <li :class="{active: $store.state.language=='zh'}">
@@ -30,13 +30,15 @@
     </div>
     <div class="navbar-inner">
       <ul class="navbar-nav__main">
-        <li v-for="(item,index) in nav" v-if="$store.state.user||item.path!='/user'" >
+        <li v-for="(item,index) in nav" v-if="$store.state.user&&$store.state.language=='zh'||!$store.state.user&&item.path!='/user'&&$store.state.language=='zh'||!$store.state.user&&item.path!='/user'&&$store.state.language=='en'&&item.path!='/industry'||$store.state.user&&$store.state.language=='en'&&item.path!='/industry'" >
           <!--导航-->
-          <router-link :to="{path: item.path}" @click.native="closeNav(item)">{{item.name}}<i v-show="item.children" class="iconfont icon-angle__down"></i></router-link>
+          <router-link :to="{path: item.path}" @click.native="closeNav(item)">
+            {{item.name}}<i v-show="item.children" class="iconfont icon-angle__down"></i>
+          </router-link>
           <!--子导航-->
           <ul v-if="item.children" class="navbar-nav__sub">
             <li v-for="itemSub in item.children">
-              <router-link :to="{path: item.path+itemSub.path}" @click.native="closeNav">{{itemSub.name}}</router-link>
+              <router-link :to="{path: itemSub.path}" @click.native="closeNav">{{itemSub.name}}</router-link>
 
             </li>
           </ul>

@@ -28,6 +28,7 @@
   color: #fff;
   .navbar-inner {
     position: relative;
+    z-index: 4;
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
@@ -458,7 +459,7 @@ $trigger-active-shape: leaf;
   .navbar-nav__main {
     >li {
       >a {
-        padding: 0 35px;
+        padding: 0 25px;
       }
     }
   }

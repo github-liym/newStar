@@ -65,7 +65,7 @@
             desc: '2018NEWSTAR国际设计大奖全球征集于2017年9月19日晚上19点30分在中国杭州武林广场举行盛大发布会，即时开始全球征集。征集期为：2017年9月19日－2018年9月19日。'
           }*/
         ],
-        pageSize: 4,
+        pageSize: 3,
         count: null,
         p: 1
       }
@@ -80,7 +80,7 @@
           p: self.p
         }
       }).then(function (res) {
-//      	console.log(res.data)
+      	console.log(res.data)
         self.newlist = res.data;
       	self.count = res.data.count;
         self.fetchLoading = false;

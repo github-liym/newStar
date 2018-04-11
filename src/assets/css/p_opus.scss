@@ -4,18 +4,26 @@ $mainColor: #fabf1b;
   padding-bottom: 45px;
 }
 .opus-list__head {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .filter-count {
   float: left;
   font-size: 18px;
   color: #767676;
   line-height: (30/18);
+  @media (max-width: 768px) {
+    float: none;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
   .filter-count__item {
     position: relative;
     display: inline-block;
     margin-right: 55px;
     cursor: pointer;
+    @media (max-width: 768px) {
+      margin-right: 30px;
+    }
     &:hover {
       color: $mainColor;
     }
@@ -42,6 +50,9 @@ $mainColor: #fabf1b;
   line-height: (15/14);
   font-weight: bold;
   color: #c9c9c9;
+  @media (max-width: 768px) {
+    float: none;
+  }
   .sort__item {
     display: inline-block;
     padding: 0 10px;
@@ -61,29 +72,152 @@ $mainColor: #fabf1b;
 .opus-list {
   margin: 0 -10px;
   .opus-item__wrap {
+    float: left;
     width: 25%;
     padding: 0 10px;
+    margin: 10px 0 0;
+  }
+}
+.pageopus {
+  .news-more {
+    margin-top: 15px;
   }
 }
 .opus-item {
+  padding-bottom: 30px;
+  font-size: 14px;
   .cover {
+    position: relative;
+    display: block;
     border-radius: 3px;
+    overflow: hidden;
+    &:hover {
+      &:after {
+        background: rgba(#000,.3);
+      }
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(#000,0);
+      transition: all linear .3s;
+    }
     &:before {
       padding-top: (192/270)*100%;
     }
   }
-}
-
-@media (max-width: 768px) {
-  .filter-count {
-    float: none;
+  .title {
+    margin-top: 10px;
     font-size: 16px;
-    margin-bottom: 10px;
-    .filter-count__item {
-      margin-right: 30px;
+    color: #454545;
+  }
+  .count {
+    margin-top: 5px;
+    color: #c9c9c9;
+    li {
+      display: inline-block;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    .icon {
+      display: inline-block;
+      vertical-align: -0.05em;
+      margin-right: 3px;
     }
   }
-  .filter-sort {
-    float: none;
+  .bottom {
+    margin-top: 15px;
+    font-size: 14px;
+  }
+  .nsid {
+    float: right;
+    color: #c9c9c9;
+  }
+}
+
+/*
+  作品详情
+*/
+.opus-info-wrap {
+  position: relative;
+  .article-wrap {
+    margin: 0 230px 0 0;
+  }
+  .author-tab {
+    position: absolute;
+    top: 130px;
+    right: 0;
+    width: 232px;
+    height: 460px;
+    padding: 25px 19px;
+    background: url("../images/author-tab-bg.png");
+    background-size: 100% 100%;
+    color: #fff;
+  }
+  .author-item {
+    margin-bottom: 10px;
+  }
+  .author-item>span {
+    display: inline-block;
+    margin-right: 5px;
+    color: #807f7f;
+  }
+  .like {
+    text-align: center;
+  }
+  .icon {
+    display: block;
+    margin: 0 auto;
+  }
+  .like-btn {
+    position: relative;
+    display: block;
+    width: 114px;
+    height: 64px;
+    padding-top: 6px;
+    margin: 110px auto 15px;
+    background: #fff;
+    border-radius: 32px;
+    color: #a7a6a4;
+    cursor: pointer;
+    &.on {
+      color: #fabf1b;
+      .i-like2 {
+        background-image: url("../images/icon/like2-on.png");
+      }
+    }
+    &.animation {
+      .interactive {
+        animation: addOne .8s linear ;
+      }
+      @keyframes addOne {
+        0% {
+          top: -8px;
+          color: rgba(#fabf1b,0);
+        }
+        98% {
+          top: -30px;
+          color: rgba(#fabf1b,1);
+        }
+        100% {
+          color: rgba(#fabf1b,0);
+        }
+      }
+    }
+    .icon {
+      display: block;
+      margin-bottom: 3px;
+    }
+    .interactive {
+      position: absolute;
+      color: rgba(#fabf1b,0);
+    }
+  }
+  .article-content {
+    min-height: 450px;
   }
 }

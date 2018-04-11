@@ -8,20 +8,6 @@
                     :playsinline="true"
                     customEventName="customstatechangedeventname">
       </video-player>
-      <!--<video-player
-                    ref="videoPlayer"
-                    :options="playerOptions"
-                    :playsinline="true"
-                    customEventName="customstatechangedeventname"
-
-                    @play="onPlayerPlay($event)"
-                    @pause="onPlayerPause($event)"
-                    @ended="onPlayerEnded($event)"
-                    @waiting="onPlayerWaiting($event)"
-
-                    @statechanged="playerStateChanged($event)"
-                    @ready="playerReadied">
-      </video-player>-->
     </div>
     <div class="swiper-bg">
       <swiper :options="swiperOption" ref="swiperCover" class="swiperCover">

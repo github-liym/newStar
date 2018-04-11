@@ -1,13 +1,21 @@
 <template>
   <div class="news-list__wrap wrap1200">
     <loading v-show="fetchLoading"></loading>
-    <h2 class="title-simple">{{web.title.media}}</h2>
-    <news v-if="newlist[$store.state.language]" class="news-list" :news="newlist[$store.state.language]"></news>
-
-    <h2 v-if="!newlist[$store.state.language]" style="text-align: center; padding-top: 12%;">{{web.media.empty}}</h2>
-
-    <div  v-show="newlist[$store.state.language]" class="news-more" @click="getData()" v-if="count>pageSize && count>pageSize*p">{{web.others.loadMore}}</div>
-    <div  v-show="newlist[$store.state.language]" class="news-more" v-if="!(count>pageSize*p)&&p>1">{{web.others.notMore}}</div>
+    <h2 class="title-simple">{{web.industry.title}}</h2>
+    <div v-if="newlist" class="news-list">
+      <div class="news-item" v-for="item in newlist">
+        <a :href="'/news/'+item.id+'.shtml'" class="cover" :style="{ backgroundImage: 'url('+item.cover+')' }"></a>
+        <div class="caption">
+          <a :href="'/news/'+item.id+'.shtml'" class="title omit">{{item.title}}</a>
+          <div class="time">{{item.time}}</div>
+          <div class="desc">{{item.desc}}</div>
+          <a class="i-triangle" :href="'/news/'+item.id+'.shtml'" >more</a>
+        </div>
+      </div>
+    </div>
+    <h2 v-if="!newlist" style="text-align: center; padding-top: 12%;">{{web.industry.empty}}</h2>
+    <div  v-show="newlist" class="news-more" @click="getData()" v-if="count>pageSize && count>pageSize*p">{{web.others.loadMore}}</div>
+    <div  v-show="newlist" class="news-more" v-if="!(count>pageSize*p)&&p>1">{{web.others.notMore}}</div>
   </div>
 </template>
 
@@ -20,14 +28,14 @@
         fetchLoading: true,
       	newlist: {},
         news: [],
-        pageSize: 3,
+        pageSize: 5,
         count: null,
         p: 1
       }
     },
     computed: {
       web(){
-        return this.$store.state.config[this.$store.state.language].web
+        return this.$store.state.config['zh'].web
       },
 
     },
@@ -35,14 +43,13 @@
     	var self = this;
     	self.$http({
         method: 'post',
-        url: '/api/text/medialist',
+        url: '/api/text/industrylist',
         data: {
           lang: self.$store.state.language,
           p: self.p
         }
       }).then(function (res) {
-//      	console.log(res.data)
-        self.newlist = res.data;
+        self.newlist = res.data['zh'];
       	self.count = res.data.count;
         self.fetchLoading = false;
       }).catch(function (err) {
@@ -54,16 +61,14 @@
         var self = this;
         self.$http({
           method: 'post',
-          url: '/api/text/medialist',
+          url: '/api/text/industrylist',
           data: {
             lang: self.$store.state.language,
             p: self.p+1
           }
         }).then(function (res) {
-//          self.newlist = res.data;
           for (var i=0;i<res.data['zh'].length;i++){
-          	self.newlist['zh'].push(res.data['zh'][i]);
-          	self.newlist['en'].push(res.data['en'][i]);
+          	self.newlist.push(res.data['zh'][i]);
           }
           self.count = res.data.count;
           self.p++;

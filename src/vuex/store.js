@@ -24,21 +24,25 @@ const state={
         },
         {
           "name": "大赛资讯",
-          "path": "/Information",
+          "path": "/Information/news",
           "children": [
             {
               "name": "大赛章程",
-              "path": "/charter"
+              "path": "/Information/charter"
             },
             {
               "name": "大赛动态",
-              "path": "/news"
+              "path": "/Information/news"
             },
             {
               name: "媒体聚焦",
-              path: "/mediaFocus"
+              path: "/Information/mediaFocus"
             }
           ]
+        },
+        {
+          "name": "行业资讯",
+          "path": "/industry"
         },
         {
           "name": "大师库",
@@ -51,6 +55,20 @@ const state={
         {
           "name": "报名参赛",
           "path": "/user"
+        },
+        {
+          "name": "资料库",
+          "path": "/database/aluminum",
+          "children": [
+            {
+              "name": "大沥铝材",
+              "path": "/database/aluminum"
+            },
+            {
+              "name": "盐步内衣",
+              "path": "/database/underwear"
+            }
+          ]
         }
       ],
       "sign": {
@@ -176,6 +194,10 @@ const state={
         },
         index: {
           master: "NewStar国际设计奖汲取了IOD创意大师的经验与人脉网。IOD创意大师由600多位世界顶级创意大师组成。"
+        },
+        industry: {
+          title: "行业资讯 | Industry Information",
+          empty: "行业资讯内容更新中，敬请期待..."
         }
       },
       "footer": {
@@ -208,22 +230,26 @@ const state={
           "path": "/aboutUs"
         },
         {
-          "name": "Competition information",
-          "path": "/Information",
+          "name": "Information",
+          "path": "/Information/news",
           "children": [
             {
               "name": "Competition regulations",
-              "path": "/charter"
+              "path": "/Information/charter"
             },
             {
               "name": "Competition dynamics",
-              "path": "/news"
+              "path": "/Information/news"
             },
             {
-              name: "Media Focus",
-              path: "/mediaFocus"
+              "name": "Media Focus",
+              "path": "/Information/mediaFocus"
             }
           ]
+        },
+        {
+          "name": "Industry Information",
+          "path": "/industry"
         },
         {
           "name": "Master library",
@@ -234,8 +260,22 @@ const state={
           "path": "/opus"
         },
         {
-          "name": "Entered the competition",
+          "name": "Join",
           "path": "/user"
+        },
+        {
+          "name": "database",
+          "path": "/database/aluminum",
+          "children": [
+            {
+              "name": "Dali Aluminum",
+              "path": "/database/aluminum"
+            },
+            {
+              "name": "Yanbu underwear",
+              "path": "/database/underwear"
+            }
+          ]
         }
       ],
       "sign": {
@@ -362,6 +402,9 @@ const state={
         },
         index: {
           master: "NewStar Design Awards draws on the experience and networks of the Ideas on Design Creative Masters. Over 600 of the world’s most innovative creative practitioners are part of the IOD Creative Masters Library."
+        },
+        industry: {
+          title: "行业资讯 | Industry Information"
         }
       },
       "footer": {

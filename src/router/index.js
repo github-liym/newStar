@@ -11,10 +11,13 @@ import charter from '@/components/page/charter'
 import Expert from '@/components/page/expert'
 import expertInfo from '@/components/page/expertInfo'
 import opus from '@/components/page/opus'
+import opusInfo from '@/components/page/opusInfo'
 import Login from '@/components/page/Login'
 import User from '@/components/page/user'
 import Information from '@/components/page/Information'
 import mediaFocus from '@/components/page/mediaFocus'
+import Industry from '@/components/page/Industry'
+import database from '@/components/page/dataBase'
 
 Vue.use(Router)
 
@@ -55,6 +58,11 @@ export default new Router({
       ]
     },
     {
+      path: '/industry',
+      name: 'industry',
+      component: Industry
+    },
+    {
       path: '/newsInfo',
       name: 'newsInfo',
       component: newsInfo,
@@ -82,6 +90,14 @@ export default new Router({
       path: '/opus',
       name: 'opus',
       component: opus
+    },
+    {
+      path: '/opusInfo',
+      name: 'opusInfo',
+      component: opusInfo,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/aboutUs',
@@ -114,6 +130,23 @@ export default new Router({
     {
       path: '*',
       redirect: '/index'
+    },
+    {
+      "path": "/database",
+      "component": database,
+      children: [
+        {
+          path: '',
+          component: database
+        },
+        {
+          path: ':type',
+          component: database
+        }
+      ],
+      "meta": {
+        "keepAlive": true
+      }
     }
   ]
 })

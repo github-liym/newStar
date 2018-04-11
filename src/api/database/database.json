@@ -1,0 +1,60 @@
+{
+  "videoThumbnail": "http://newstar.91ant.com/video/video_cover.png",
+  "video": "http://newstar.91ant.com/video/video.mp4",
+  "article": "文章内容",
+  "download": "下载资料路径",
+  "company": [
+    {
+      "name": "公司名A",
+      "desc": "广东凤铝铝业有限公司成立于1990年，是集铝合金型材产品研发、生产与销售为一体的综合型大型企业，是中国铝型材行业的领军企业。公司拥有南海和三水两大基地，占地总面积90万㎡，主要研发与生产建筑铝型材、工业材、高端装饰材、高端系统门窗及航空航天、军工类等特种铝合金产品。是中国铝型材行业的领军企业。公司拥有南海和三水两大基地，占地总面积90万㎡，主要研发与生产建筑铝型材。",
+      "link": "//baidu.com",
+      "thumbnail": ["//ate.91ant.com/Public/common/works/0/1/1925/5194.png", "//ate.91ant.com/Public/common/works/0/1/1925/5195.png", "//ate.91ant.com/Public/common/works/0/1/1925/5196.png", "//ate.91ant.com/Public/common/works/0/1/1925/5197.png", "//ate.91ant.com/Public/common/works/0/1/1925/5198.png"]
+    },
+    {
+      "name": "公司名B",
+      "desc": "公司B介绍摘要",
+      "link": "//baidu.com",
+      "thumbnail": ["//ate.91ant.com/Public/common/works/0/1/1924/5188.png", "//ate.91ant.com/Public/common/works/0/1/1924/5189.png", "//ate.91ant.com/Public/common/works/0/1/1924/5190.png", "//ate.91ant.com/Public/common/works/0/1/1924/5191.png", "//ate.91ant.com/Public/common/works/0/1/1924/5192.png"]
+    },
+    {
+      "name": "公司名C",
+      "desc": "公司C介绍摘要",
+      "link": "//baidu.com",
+      "thumbnail": ["//ate.91ant.com//Public/common/works/0/1/1922/5176.png", "//ate.91ant.com/Public/common/works/0/1/1922/5177.png", "//ate.91ant.com/Public/common/works/0/1/1922/5178.png", "//ate.91ant.com/Public/common/works/0/1/1922/5179.png", "//ate.91ant.com/Public/common/works/0/1/1922/5181.png"]
+    }
+  ],
+  "album": [
+    {
+      "thumbnail": "//ate.91ant.com/Public/common/works/0/1/1922/5181.png",
+      "title": "标题标题标题标题标题标题标题标题标题标题标题"
+    },
+    {
+      "thumbnail": "//ate.91ant.com/Public/common/works/0/1/1922/5179.png",
+      "title": "标题"
+    },
+    {
+      "thumbnail": "//ate.91ant.com/Public/common/works/0/1/1922/5178.png",
+      "title": "标题"
+    },
+    {
+      "thumbnail": "//ate.91ant.com/Public/common/works/0/1/1924/5192.png",
+      "title": "标题"
+    },
+    {
+      "thumbnail": "//ate.91ant.com/Public/common/works/0/1/1924/5190.png",
+      "title": "标题"
+    },
+    {
+      "thumbnail": "//ate.91ant.com/Public/common/works/0/1/1924/5191.png",
+      "title": "标题"
+    },
+    {
+      "thumbnail": "//ate.91ant.com/Public/common/works/0/1/1925/5196.png",
+      "title": "标题"
+    },
+    {
+      "thumbnail": "//ate.91ant.com/Public/common/works/0/1/1925/5197.png",
+      "title": "标题"
+    }
+  ]
+}
