@@ -7,7 +7,7 @@
           <div class="caption">
             <a :href="item.link" class="title" target="_blank">{{item.name}}</a>
             <div class="desc">{{item.desc}}</div>
-            <a :href="item.link" class="link" target="_blank">访问企业官网<i class="iconfont icon-angle__right"></i></a>
+            <a :href="item.link" class="link" target="_blank">{{text}}<i class="iconfont icon-angle__right"></i></a>
           </div>
         </div>
         <ul class="thumb-other">
@@ -30,7 +30,7 @@
   import 'video.js/dist/video-js.css'
   export default {
     name: 'carrousel',
-    props: ['company'],
+    props: ['company','text'],
     data() {
       return {
         swiperOption: {

@@ -56,7 +56,7 @@ const state={
           "name": "报名参赛",
           "path": "/user"
         },
-        {
+        /*{
           "name": "资料库",
           "path": "/database/aluminum",
           "children": [
@@ -69,7 +69,7 @@ const state={
               "path": "/database/underwear"
             }
           ]
-        }
+        }*/
       ],
       "sign": {
         "signIn": {
@@ -198,6 +198,13 @@ const state={
         industry: {
           title: "行业资讯 | Industry Information",
           empty: "行业资讯内容更新中，敬请期待..."
+        },
+        database: {
+          "introduceTitle": "产业介绍",
+          "download": "下载资料",
+          "company": "名企风采",
+          "companyLink": "访问企业官网",
+          "albumTitle": "产品相册"
         }
       },
       "footer": {
@@ -263,7 +270,7 @@ const state={
           "name": "Join",
           "path": "/user"
         },
-        {
+        /*{
           "name": "database",
           "path": "/database/aluminum",
           "children": [
@@ -276,7 +283,7 @@ const state={
               "path": "/database/underwear"
             }
           ]
-        }
+        }*/
       ],
       "sign": {
         "signIn": {
@@ -405,6 +412,13 @@ const state={
         },
         industry: {
           title: "行业资讯 | Industry Information"
+        },
+        database: {
+          "introduceTitle": "Introduction",
+          "download": "Download Information",
+          "company": "Famous enterprises",
+          "companyLink": "Visit the official website of the company",
+          "albumTitle": "Album"
         }
       },
       "footer": {
